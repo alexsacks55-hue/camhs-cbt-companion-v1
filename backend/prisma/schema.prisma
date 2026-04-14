@@ -1,0 +1,368 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// CAMHS CBT Companion — Prisma Schema
+//
+// Privacy rules enforced at schema level:
+//   • No free-text therapeutic columns anywhere.
+//   • No real names, DOBs, or identifiable fields on users.
+//   • Session Companion data is temporary and deleted by the expiry job.
+//   • Analytics live in a separate PostgreSQL schema ("analytics"),
+//     isolated from therapeutic data ("core").
+// ─────────────────────────────────────────────────────────────────────────────
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  schemas   = ["core", "analytics"]
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  young_person
+  parent_carer
+  practitioner
+  trainee_practitioner
+  admin
+
+  @@schema("core")
+}
+
+enum AgeBand {
+  under_11
+  eleven_to_fifteen
+  sixteen_to_eighteen
+  adult
+
+  @@schema("core")
+}
+
+enum ResourceCategory {
+  anxiety
+  low_mood
+  behavioural_challenges
+  sleep
+
+  @@schema("core")
+}
+
+enum ResourceSection {
+  learn
+  activities
+
+  @@schema("core")
+}
+
+enum ResourceStatus {
+  draft
+  published
+  hidden
+  archived
+
+  @@schema("core")
+}
+
+enum ExportType {
+  none
+  blank_template
+  structured_summary
+
+  @@schema("core")
+}
+
+/// journey_step: "try_it" maps to "try" in UI copy — reserved word avoided.
+enum JourneyStep {
+  understand
+  try_it
+  practise
+  review
+
+  @@schema("core")
+}
+
+enum ContentType {
+  text
+  pdf
+  audio
+  video
+  worksheet
+
+  @@schema("core")
+}
+
+enum SummaryType {
+  weekly_review
+  activity_summary
+
+  @@schema("core")
+}
+
+enum PromptType {
+  low_mood
+  high_anxiety
+  distress_emotions
+  urgent_support
+
+  @@schema("core")
+}
+
+// ─── Core Tables ──────────────────────────────────────────────────────────────
+
+/// Pseudonymous user account. No real names, email, or DOBs stored.
+/// Email/phone tokens are out of scope for V1 unless added via a separate
+/// encrypted table — never in this record.
+model User {
+  id                   String   @id @default(uuid())
+  /// Chosen pseudonym — not a real name.
+  username             String   @unique
+  password_hash        String
+  role                 UserRole
+  /// Only set for young_person accounts.
+  age_band             AgeBand?
+  /// Young person has confirmed they understand the app purpose.
+  consent_given        Boolean  @default(false)
+  /// Parent/carer has been made aware (required for ages 11–15).
+  parental_aware       Boolean  @default(false)
+  /// CBT programme the user is working through: "anxiety", "low_mood", "behavioural_challenges", "sleep".
+  manual_type          String?
+  /// Hashed refresh token. One active session per user in V1. Null = logged out.
+  refresh_token_hash   String?
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+
+  mood_checkins          MoodCheckin[]
+  activity_completions   ActivityCompletion[]
+  structured_summaries   StructuredSummary[]
+  safeguarding_prompts   SafeguardingPrompt[]
+  activity_diary_entries ActivityDiaryEntry[]
+
+  @@map("users")
+  @@schema("core")
+}
+
+/// CBT resource — psychoeducation or activity. Never contains user data.
+model Resource {
+  id              String           @id @default(uuid())
+  title           String
+  description     String
+  category        ResourceCategory
+  section         ResourceSection
+  status          ResourceStatus   @default(draft)
+  export_type     ExportType       @default(none)
+  journey_step    JourneyStep?
+  content_type    ContentType      @default(text)
+  /// URL to PDF/audio file in Azure Blob Storage or CDN.
+  file_url        String?
+  /// Full body text for Learn resources — displayed on the detail page. No user data.
+  body_text       String?
+  /// JSON array of {label, url} for linked external resources.
+  external_links  Json?
+  /// Suggested therapy session number — never locks access.
+  typical_session Int?
+  sort_order      Int              @default(0)
+  /// YouTube privacy-enhanced embed URL (youtube-nocookie.com). Null = no video for this session.
+  video_url       String?
+  /// Helper text shown directly above the video embed (e.g. "Watch: What is Depression? (4 mins)").
+  video_label     String?
+  /// Position of the video relative to body text: "top" (before) or "below" (after).
+  video_placement String?
+  /// UUID of the admin user who created this — not a link to a young person.
+  created_by      String?
+  created_at      DateTime         @default(now())
+  updated_at      DateTime         @updatedAt
+
+  visibility ResourceVisibility[]
+
+  @@index([category, section, status])
+  @@index([category, sort_order])
+  @@map("resources")
+  @@schema("core")
+}
+
+/// Which roles can see each resource. Admin manages this through the CMS.
+model ResourceVisibility {
+  id          String   @id @default(uuid())
+  resource_id String
+  role        UserRole
+
+  resource Resource @relation(fields: [resource_id], references: [id], onDelete: Cascade)
+
+  @@unique([resource_id, role])
+  @@map("resource_visibility")
+  @@schema("core")
+}
+
+/// Structured mood check-in. Arrays store fixed-list values only — no free text.
+/// mood_rating and anxiety_rating are 0–10 integers.
+model MoodCheckin {
+  id                String   @id @default(uuid())
+  user_id           String
+  /// 0–10 — validated in service layer.
+  mood_rating       Int
+  /// 0–10 — validated in service layer.
+  anxiety_rating    Int
+  /// Values from EMOTION_CHOICES constant — stored as strings, never free text.
+  emotions          String[]
+  /// Values from CONTEXT_CHOICES constant.
+  contexts          String[]
+  /// Values from COPING_STRATEGY_CHOICES constant.
+  coping_strategies String[]
+  created_at        DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id, created_at])
+  @@map("mood_checkins")
+  @@schema("core")
+}
+
+/// Records that a user completed a resource activity.
+/// before_rating / after_rating support simple before/after reflection (0–10).
+/// reflection_choices contains values from a fixed list — no free text.
+model ActivityCompletion {
+  id                 String   @id @default(uuid())
+  user_id            String
+  resource_id        String
+  /// Optional self-rating before starting the activity (0–10).
+  before_rating      Int?
+  /// Optional self-rating after completing the activity (0–10).
+  after_rating       Int?
+  /// Fixed-list reflection labels only.
+  reflection_choices String[]
+  completed_at       DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id, completed_at])
+  @@map("activity_completions")
+  @@schema("core")
+}
+
+/// Generated weekly review or activity summary.
+/// The `data` JSON field contains counts, labels, and ratings only —
+/// no personal text, names, or identifiable details.
+/// Example: { checkins: 4, emotions: ["worried","tired"], strategies: ["breathing"] }
+model StructuredSummary {
+  id           String      @id @default(uuid())
+  user_id      String
+  summary_type SummaryType
+  period_start DateTime
+  period_end   DateTime
+  /// Safe structured JSON — validated before write, never contains free text.
+  data         Json
+  generated_at DateTime    @default(now())
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id, summary_type, generated_at])
+  @@map("structured_summaries")
+  @@schema("core")
+}
+
+/// Temporary session record for in-therapy collaboration.
+/// The expiry job deletes rows where expires_at has passed.
+/// No permanent link between practitioner and young person accounts.
+model SessionCompanion {
+  id              String    @id @default(uuid())
+  /// Short, human-readable code shared verbally (e.g. "CAT-472").
+  session_code    String    @unique
+  /// ID of the practitioner who started the session.
+  practitioner_id String
+  started_at      DateTime  @default(now())
+  /// Recalculated to now() + 10 min on each activity update.
+  expires_at      DateTime
+  last_active_at  DateTime  @default(now())
+  ended_at        DateTime?
+  is_active       Boolean   @default(true)
+
+  activities SessionCompanionActivity[]
+
+  @@index([session_code, is_active])
+  @@index([expires_at, is_active])
+  @@map("session_companions")
+  @@schema("core")
+}
+
+/// Temporary activity data within a session.
+/// Cascade-deleted when the parent SessionCompanion is deleted.
+/// activity_data JSON must contain structured choices only — no free text.
+model SessionCompanionActivity {
+  id            String   @id @default(uuid())
+  session_id    String
+  activity_type String
+  /// Structured data only. Validated before write.
+  activity_data Json
+  created_at    DateTime @default(now())
+
+  session SessionCompanion @relation(fields: [session_id], references: [id], onDelete: Cascade)
+
+  @@map("session_companion_activities")
+  @@schema("core")
+}
+
+/// Daily Behavioural Activation diary entry. One entry per user per calendar day.
+/// activities JSON: [{ name: string, helped: boolean }] — fixed-list names only, no free text.
+model ActivityDiaryEntry {
+  id           String   @id @default(uuid())
+  user_id      String
+  /// Calendar date stored as "YYYY-MM-DD" string for unambiguous uniqueness per day.
+  entry_date   String
+  /// 1–10 — validated in service layer.
+  mood_rating  Int
+  /// Fixed-list activity entries. No free text.
+  activities   Json     @default("[]")
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, entry_date])
+  @@index([user_id, entry_date])
+  @@map("activity_diary_entries")
+  @@schema("core")
+}
+
+/// Audit log of safeguarding prompts shown to users.
+/// Used for clinical governance, not for monitoring individual behaviour.
+model SafeguardingPrompt {
+  id          String     @id @default(uuid())
+  user_id     String
+  prompt_type PromptType
+  shown_at    DateTime   @default(now())
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id, shown_at])
+  @@map("safeguarding_prompts")
+  @@schema("core")
+}
+
+// ─── Analytics Schema (separate, anonymous) ───────────────────────────────────
+// IMPORTANT: No joins from analytics to core schema tables.
+// No individual user identifiers stored here.
+
+/// Anonymous service-level event. Aggregated for practitioner insights only.
+/// Never exposes individual user behaviour.
+model AnalyticsEvent {
+  id          String   @id @default(uuid())
+  /// E.g. "resource_viewed", "mood_checkin_completed" — see ANALYTICS_EVENTS constant.
+  event_type  String
+  /// Resource UUID reference (no foreign key — intentionally decoupled).
+  resource_id String?
+  /// Resource category string for aggregation.
+  category    String?
+  /// Role group label (e.g. "young_person") for cohort trends — not an individual ID.
+  role_band   String?
+  occurred_at DateTime @default(now())
+  /// Safe anonymous context metadata. No names, user IDs, or personal details.
+  metadata    Json?
+
+  @@index([event_type, occurred_at])
+  @@index([occurred_at])
+  @@map("analytics_events")
+  @@schema("analytics")
+}

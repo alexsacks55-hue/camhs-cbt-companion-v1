@@ -1,0 +1,1329 @@
+▗ ▗   ▖ ▖  Claude Code v2.1.90
+           Sonnet 4.6 · Claude Pro
+  ▘▘ ▝▝    ~/Desktop/camhs-cbt-companion/backend
+
+  ✻ Voice mode is now available · /voice to enable
+
+  Read 4 files (ctrl+o to expand)
+
+⏺ Update(src/pages/home/AdminDashboard.tsx)
+  ⎿  Added 5 lines
+      21            description="Add, edit, publish, and archive resources and worksheets across all four programme categories."
+      22            linkTo="/admin/resources"
+      23            linkLabel="Manage resources"
+      24 +          color="navy"                                                                                                                                                                         
+      25          />
+      26          <NHSCard
+      27            icon="📈"
+     ...
+      29            description="Review anonymous, aggregated usage trends to understand engagement across the service."
+      30            linkTo="/service-insights"
+      31            linkLabel="View insights"
+      32 +          color="teal"                                                                                                                                                                         
+      33          />
+      34          <NHSCard
+      35            icon="📚"
+     ...
+      37            description="Browse the live resource library as it appears to users."
+      38            linkTo="/resources"
+      39            linkLabel="Browse resources"
+      40 +          color="blue"                                                                                                                                                                         
+      41          />
+      42          <NHSCard
+      43            icon="🤝"
+     ...
+      45            description="Start a live collaborative session with a young person using a temporary shared session code."
+      46            linkTo="/session-companion/start"
+      47            linkLabel="Start a session"
+      48 +          color="sand"                                                                                                                                                                         
+      49          />
+      50          <NHSCard
+      51            icon="💛"
+     ...
+      53            description="Support contacts and documentation for using and administering CBT Companion."
+      54            linkTo="/support"
+      55            linkLabel="Get support"
+      56 +          color="lavender"                                                                                                                                                                     
+      57          />
+      58        </div>
+      59      </div>
+
+⏺ Update(src/pages/home/PractitionerDashboard.tsx)
+  ⎿  Added 4 lines
+      21            description="Start a live collaborative session with a young person using a temporary shared session code."
+      22            linkTo="/session-companion/start"
+      23            linkLabel="Start a session"
+      24 +          color="sand"                                                                                                                                                                         
+      25          />
+      26          <NHSCard
+      27            icon="📚"
+     ...
+      29            description="Browse CBT manuals, psychoeducation guides, and printable activity worksheets."
+      30            linkTo="/resources"
+      31            linkLabel="Browse resources"
+      32 +          color="navy"                                                                                                                                                                         
+      33          />
+      34          <NHSCard
+      35            icon="📈"
+     ...
+      37            description="Review anonymous, aggregated engagement trends to understand how the service is being used."
+      38            linkTo="/service-insights"
+      39            linkLabel="View insights"
+      40 +          color="teal"                                                                                                                                                                         
+      41          />
+      42          <NHSCard
+      43            icon="💛"
+     ...
+      45            description="Guidance on using CBT Companion safely and effectively in your clinical practice."
+      46            linkTo="/support"
+      47            linkLabel="Get support"
+      48 +          color="lavender"                                                                                                                                                                     
+      49          />
+      50        </div>
+      51      </div>
+
+⏺ Update(src/pages/home/TraineePractitionerDashboard.tsx)
+  ⎿  Added 5 lines
+      21            description="Start a live collaborative session with a young person using a temporary shared session code."
+      22            linkTo="/session-companion/start"
+      23            linkLabel="Start a session"
+      24 +          color="sand"                                                                                                                                                                         
+      25          />
+      26          <NHSCard
+      27            icon="📚"
+     ...
+      29            description="Browse CBT manuals, psychoeducation guides, and printable activity worksheets."
+      30            linkTo="/resources"
+      31            linkLabel="Browse resources"
+      32 +          color="navy"                                                                                                                                                                         
+      33          />
+      34          <NHSCard
+      35            icon="🎓"
+     ...
+      37            description="Track your training assignments, review key clinical reminders, and access session scripts."
+      38            linkTo="/training"
+      39            linkLabel="View training"
+      40 +          color="blue"                                                                                                                                                                         
+      41          />
+      42          <NHSCard
+      43            icon="📈"
+     ...
+      45            description="Review anonymous, aggregated engagement trends to understand how the service is being used."
+      46            linkTo="/service-insights"
+      47            linkLabel="View insights"
+      48 +          color="teal"                                                                                                                                                                         
+      49          />
+      50          <NHSCard
+      51            icon="💛"
+     ...
+      53            description="Guidance on using CBT Companion safely and effectively in your clinical practice."
+      54            linkTo="/support"
+      55            linkLabel="Get support"
+      56 +          color="lavender"                                                                                                                                                                     
+      57          />
+      58        </div>
+      59      </div>
+
+⏺ Update(src/pages/home/ParentCarerDashboard.tsx)
+  ⎿  Added 4 lines
+      21            description="Access psychoeducation guides, CBT explanations, and printable worksheets relevant to your young person's programme."
+      22            linkTo="/resources"
+      23            linkLabel="Browse resources"
+      24 +          color="navy"                                                                                                                                                                         
+      25          />
+      26          <NHSCard
+      27            icon="📋"
+     ...
+      29            description="Record how you or your young person has been feeling and track patterns over time."
+      30            linkTo="/check-in"
+      31            linkLabel="Start check-in"
+      32 +          color="blue"                                                                                                                                                                         
+      33          />
+      34          <NHSCard
+      35            icon="📊"
+     ...
+      37            description="See a summary of recent check-ins and activities to support conversations with your practitioner."
+      38            linkTo="/review"
+      39            linkLabel="View review"
+      40 +          color="lavender"                                                                                                                                                                     
+      41          />
+      42          <NHSCard
+      43            icon="💛"
+     ...
+      45            description="Guidance on supporting a young person through CBT, plus contacts for urgent help."
+      46            linkTo="/support"
+      47            linkLabel="View support"
+      48 +          color="teal"                                                                                                                                                                         
+      49          />
+      50        </div>
+      51      </div>
+
+
+⏺ All four remaining dashboards updated with varied colour assignments:
+
+  - Admin: Content Management (navy), Service Insights (teal), Resources (blue), Session Companion (sand), Help and Support (lavender)
+  - Practitioner: Session Companion (sand), Resources (navy), Service Insights (teal), Help and Support (lavender)
+  - Trainee Practitioner: Session Companion (sand), Resources (navy), Assignments (blue), Service Insights (teal), Help and Support (lavender)
+  - Parent/Carer: Resources (navy), Mood Check-In (blue), Weekly Review (lavender), Help and Support (teal)
+
+✻ Cooked for 7m 41s
+
+❯ the NHS logo in the top banner and on the homepage needs to be more prominent please. Please can you also make the login page aesthetically  
+uniformed to the rest                                                                                                                          
+
+  Searched for 2 patterns, read 4 files (ctrl+o to expand)
+
+⏺ Now I have everything I need. Three changes:
+
+  1. TopNav — bigger NHS badge
+  2. NHSWelcomeBanner — larger, bolder lozenge
+  3. AuthLayout — add an NHS-branded header panel so the login/signup pages match the rest of the app
+
+⏺ Update(src/components/nav/TopNav.tsx)
+  ⎿  Added 1 line, removed 1 line
+      26          {/* App name */}
+      27          <div className="flex items-center gap-sm">
+      28            <span
+      29 -            className="inline-flex items-center justify-center rounded px-1.5 py-0.5 text-xs font-black tracking-tight"                                                                        
+      29 +            className="inline-flex items-center justify-center rounded px-2.5 py-1 text-sm font-black tracking-tight leading-none"                                                             
+      30              style={{ backgroundColor: "white", color: "#003087" }}
+      31              aria-label="NHS"
+      32            >
+
+
+⏺ Now make the NHSLozenge in the welcome banner bigger and bolder:
+
+⏺ Update(src/components/ui/nhs-dashboard.tsx)
+  ⎿  Added 3 lines, removed 3 lines
+       8  
+       9  // ── NHS Lozenge ───────────────────────────────────────────────────────────────
+      10  
+      11 -export function NHSLozenge() {                                                                                                                                                                 
+      11 +export function NHSLozenge({ size = "md" }: { size?: "md" | "lg" }) {                                                                                                                          
+      12    return (
+      13      <span
+      14 -      className="inline-flex items-center justify-center rounded px-2 py-0.5"                                                                                                                  
+      14 +      className={`inline-flex items-center justify-center rounded ${size === "lg" ? "px-4 py-1.5" : "px-2.5 py-1"}`}                                                                           
+      15        style={{ backgroundColor: "#ffffff" }}
+      16        aria-label="NHS"
+      17      >
+      18        <span
+      19 -        className="text-sm font-black tracking-tight leading-none"                                                                                                                             
+      19 +        className={`font-black tracking-tight leading-none ${size === "lg" ? "text-xl" : "text-sm"}`}                                                                                          
+      20          style={{ color: "#003087" }}
+      21        >
+      22          NHS
+
+⏺ Now use size="lg" in the welcome banner:
+
+⏺ Update(src/components/ui/nhs-dashboard.tsx)
+  ⎿  Added 2 lines, removed 2 lines
+      53  
+      54        {/* NHS branding row */}
+      55        <div className="relative flex items-center gap-sm mb-lg">
+      56 -        <NHSLozenge />                                                                                                                                                                         
+      57 -        <span className="text-caption font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.70)" }}>                                                                                
+      56 +        <NHSLozenge size="lg" />                                                                                                                                                               
+      57 +        <span className="text-body font-bold tracking-wide" style={{ color: "rgba(255,255,255,0.85)" }}>                                                                                       
+      58            CBT Companion
+      59          </span>
+      60        </div>
+
+⏺ Now overhaul AuthLayout to match the rest of the app — NHS Blue header panel with prominent branding, then the card form below:
+
+⏺ Write(src/layouts/AuthLayout.tsx)
+  ⎿  Added 52 lines, removed 22 lines
+      1  /**
+      2 - * Calm, centered layout used for all auth and onboarding screens.                                                                                                                              
+      3 - * Single-column, max readable width, generous padding.                                                                                                                                         
+      4 - * Matches design-guidelines.md emotional thesis: "calm studio in Copenhagen".                                                                                                                  
+      2 + * Auth / onboarding layout.                                                                                                                                                                    
+      3 + * Full-page NHS Blue header strip + centred card below — consistent with the rest of the app.                                                                                                  
+      4   */
+      5  export function AuthLayout({
+      6    children,
+     ...
+      12    totalSteps?: number;
+      13  }) {
+      14    return (
+      16 -    <div className="flex min-h-screen flex-col items-center justify-center bg-brand-bg px-md py-xxl">                                                                                          
+      17 -      {/* Progress indicator for multi-step onboarding */}                                                                                                                                     
+      18 -      {step !== undefined && totalSteps !== undefined && (                                                                                                                                     
+      19 -        <div className="mb-lg flex gap-sm" role="progressbar" aria-valuenow={step} aria-valuemax={totalSteps}>                                                                                 
+      20 -          {Array.from({ length: totalSteps }).map((_, i) => (                                                                                                                                  
+      21 -            <span                                                                                                                                                                              
+      22 -              key={i}                                                                                                                                                                          
+      23 -              className={`h-1.5 w-8 rounded-full transition-colors duration-200 ${                                                                                                             
+      24 -                i < step ? "bg-primary" : i === step ? "bg-primary/60" : "bg-border"                                                                                                           
+      25 -              }`}                                                                                                                                                                              
+      26 -            />                                                                                                                                                                                 
+      27 -          ))}                                                                                                                                                                                  
+      15 +    <div className="flex min-h-screen flex-col bg-brand-bg">                                                                                                                                   
+      16 +      {/* ── NHS Header ─────────────────────────────────────────────────────── */}                                                                                                            
+      17 +      <header                                                                                                                                                                                  
+      18 +        className="w-full px-lg py-md"                                                                                                                                                         
+      19 +        style={{ backgroundColor: "#003087", borderBottom: "3px solid #41B6E6" }}                                                                                                              
+      20 +      >                                                                                                                                                                                        
+      21 +        <div className="mx-auto flex max-w-content items-center gap-md">                                                                                                                       
+      22 +          {/* NHS lozenge */}                                                                                                                                                                  
+      23 +          <span                                                                                                                                                                                
+      24 +            className="inline-flex items-center justify-center rounded px-3 py-1.5 text-base font-black tracking-tight leading-none"                                                           
+      25 +            style={{ backgroundColor: "#ffffff", color: "#003087" }}                                                                                                                           
+      26 +            aria-label="NHS"                                                                                                                                                                   
+      27 +          >                                                                                                                                                                                    
+      28 +            NHS                                                                                                                                                                                
+      29 +          </span>                                                                                                                                                                              
+      30 +          <div>                                                                                                                                                                                
+      31 +            <p className="text-body font-bold leading-tight text-white">CBT Companion</p>                                                                                                      
+      32 +            <p className="text-caption leading-tight" style={{ color: "rgba(255,255,255,0.65)" }}>                                                                                             
+      33 +              CAMHS digital support tool                                                                                                                                                       
+      34 +            </p>                                                                                                                                                                               
+      35 +          </div>                                                                                                                                                                               
+      36          </div>
+      29 -      )}                                                                                                                                                                                       
+      37 +      </header>                                                                                                                                                                                
+      38  
+      31 -      {/* Content card */}                                                                                                                                                                     
+      32 -      <div className="w-full max-w-content rounded-xl border border-border bg-card p-xl shadow-sm">                                                                                            
+      33 -        {children}                                                                                                                                                                             
+      34 -      </div>                                                                                                                                                                                   
+      39 +      {/* ── Main content ───────────────────────────────────────────────────── */}                                                                                                            
+      40 +      <main className="flex flex-1 flex-col items-center justify-center px-md py-xl">                                                                                                          
+      41 +        {/* Progress dots for multi-step onboarding */}                                                                                                                                        
+      42 +        {step !== undefined && totalSteps !== undefined && (                                                                                                                                   
+      43 +          <div                                                                                                                                                                                 
+      44 +            className="mb-lg flex gap-sm"                                                                                                                                                      
+      45 +            role="progressbar"                                                                                                                                                                 
+      46 +            aria-valuenow={step}                                                                                                                                                               
+      47 +            aria-valuemax={totalSteps}                                                                                                                                                         
+      48 +          >                                                                                                                                                                                    
+      49 +            {Array.from({ length: totalSteps }).map((_, i) => (                                                                                                                                
+      50 +              <span                                                                                                                                                                            
+      51 +                key={i}                                                                                                                                                                        
+      52 +                className={`h-1.5 w-8 rounded-full transition-colors duration-200 ${                                                                                                           
+      53 +                  i < step ? "bg-primary" : i === step ? "bg-primary/60" : "bg-border"                                                                                                         
+      54 +                }`}                                                                                                                                                                            
+      55 +              />                                                                                                                                                                               
+      56 +            ))}                                                                                                                                                                                
+      57 +          </div>                                                                                                                                                                               
+      58 +        )}                                                                                                                                                                                     
+      59  
+      36 -      {/* App name — unobtrusive */}                                                                                                                                                           
+      37 -      <p className="mt-lg text-caption text-muted-foreground">CAMHS CBT Companion</p>                                                                                                          
+      60 +        {/* Card */}                                                                                                                                                                           
+      61 +        <div                                                                                                                                                                                   
+      62 +          className="w-full max-w-content rounded-2xl border bg-card p-xl shadow-card"                                                                                                         
+      63 +          style={{ borderColor: "rgba(65,182,230,0.25)" }}                                                                                                                                     
+      64 +        >                                                                                                                                                                                      
+      65 +          {children}                                                                                                                                                                           
+      66 +        </div>                                                                                                                                                                                 
+      67 +      </main>                                                                                                                                                                                  
+      68      </div>
+      69    );
+      70  }
+
+⏺ Done. Here's what changed:
+
+  - TopNav NHS badge — slightly larger (px-2.5 py-1 text-sm) so it reads more clearly at a glance
+  - Welcome banner lozenge — new size="lg" variant (px-4 py-1.5 text-xl) makes it much more prominent, and "CBT Companion" text beside it is
+  now full text-body font-bold instead of caption weight
+  - AuthLayout — replaced the plain minimal layout with a full-width NHS Blue header (same 3px #41B6E6 underline as the TopNav) showing the NHS
+   lozenge, app name, and subtitle; the form card now uses shadow-card and a light blue border tint to match the dashboard card style
+
+✻ Churned for 1m 5s
+
+❯ can you get rid of service insights in the front page? I want the homepage to look quite nice and symmetrical like a professional homepage   
+of a website. Do you have any recommendations of what else I could do to achieve this                                                          
+
+⏺ Let me make the removal first, then I'll give you proper recommendations.
+
+⏺ Update(src/pages/home/AdminDashboard.tsx)
+  ⎿  Added 1 line, removed 9 lines
+      23            linkLabel="Manage resources"
+      24            color="navy"
+      25          />
+      26 -        <NHSCard                                                                                                                                                                               
+      27 -          icon="📈"                                                                                                                                                                            
+      28 -          title="Service Insights"                                                                                                                                                             
+      29 -          description="Review anonymous, aggregated usage trends to understand engagement across the service."                                                                                 
+      30 -          linkTo="/service-insights"                                                                                                                                                           
+      31 -          linkLabel="View insights"                                                                                                                                                            
+      32 -          color="teal"                                                                                                                                                                         
+      33 -        />                                                                                                                                                                                     
+      34 -        <NHSCard                                                                                                                                                                               
+      26 +<NHSCard                                                                                                                                                                                       
+      27            icon="📚"
+      28            title="Resources"
+      29            description="Browse the live resource library as it appears to users."
+
+⏺ Update(src/pages/home/PractitionerDashboard.tsx)
+  ⎿  Added 1 line, removed 9 lines
+      31            linkLabel="Browse resources"
+      32            color="navy"
+      33          />
+      34 -        <NHSCard                                                                                                                                                                               
+      35 -          icon="📈"                                                                                                                                                                            
+      36 -          title="Service Insights"                                                                                                                                                             
+      37 -          description="Review anonymous, aggregated engagement trends to understand how the service is being used."                                                                            
+      38 -          linkTo="/service-insights"                                                                                                                                                           
+      39 -          linkLabel="View insights"                                                                                                                                                            
+      40 -          color="teal"                                                                                                                                                                         
+      41 -        />                                                                                                                                                                                     
+      42 -        <NHSCard                                                                                                                                                                               
+      34 +<NHSCard                                                                                                                                                                                       
+      35            icon="💛"
+      36            title="Help and Support"
+      37            description="Guidance on using CBT Companion safely and effectively in your clinical practice."
+
+⏺ Update(src/pages/home/TraineePractitionerDashboard.tsx)
+  ⎿  Added 1 line, removed 9 lines
+      39            linkLabel="View training"
+      40            color="blue"
+      41          />
+      42 -        <NHSCard                                                                                                                                                                               
+      43 -          icon="📈"                                                                                                                                                                            
+      44 -          title="Service Insights"                                                                                                                                                             
+      45 -          description="Review anonymous, aggregated engagement trends to understand how the service is being used."                                                                            
+      46 -          linkTo="/service-insights"                                                                                                                                                           
+      47 -          linkLabel="View insights"                                                                                                                                                            
+      48 -          color="teal"                                                                                                                                                                         
+      49 -        />                                                                                                                                                                                     
+      50 -        <NHSCard                                                                                                                                                                               
+      42 +<NHSCard                                                                                                                                                                                       
+      43            icon="💛"
+      44            title="Help and Support"
+      45            description="Guidance on using CBT Companion safely and effectively in your clinical practice."
+
+⏺ Now fix the Practitioner grid — it now has 3 cards which would leave a half-empty row in a 2-col grid. Switch it to 3 equal columns on wider
+  screens:
+
+⏺ Update(src/pages/home/PractitionerDashboard.tsx)
+  ⎿  Added 1 line, removed 1 line
+      14          message="Welcome to CBT Companion — your centralised system to prepare for sessions, access clinical documents, and support your work with young people."
+      15        />
+      16  
+      17 -      <div className="grid gap-md sm:grid-cols-2">                                                                                                                                             
+      17 +      <div className="grid gap-md sm:grid-cols-3">                                                                                                                                             
+      18          <NHSCard
+      19            icon="🤝"
+      20            title="Session Companion"
+
+
+⏺ Done. Service Insights is removed from all three dashboards (Admin, Practitioner, Trainee Practitioner). The Practitioner grid now uses 3
+  equal columns so all cards sit in one balanced row.
+
+  ---
+  Recommendations for a more professional, symmetrical homepage:
+
+  1. Dedicated "quick action" hero button
+  The "How are you feeling today?" check-in button could be larger and more visually distinct — a full-width card with a gradient background
+  and a subtitle like "Your last check-in was 2 days ago." This creates a clear primary call-to-action at the top before the grid.
+
+  2. Enforce even card counts in 2-column grids
+  Even numbers (2, 4, 6) always produce a clean grid with no orphaned card. Currently the young person dashboard has 6 (perfect). Admin has 4
+  after your change (perfect). Trainee has 4 (perfect). You could pair the two "Help and Support" orphan-risk cards with something purposeful.
+
+  3. Group cards into labelled sections
+  Instead of one flat grid, divide into two named rows with a small heading:
+
+  ▎ Your tools → Check-In · Review · Patterns · Resources
+  ▎ Support → Session Companion · Help
+
+  This adds visual structure and guides the eye down the page naturally.
+
+  4. Add a thin "at a glance" stats strip between the banner and the cards
+  A row of 3 small stat chips (e.g., "Check-ins this week: 4", "Streak: 3 days", "Last mood: 7/10") gives the page something dynamic and
+  personalised without clutter. It makes the dashboard feel alive rather than a static menu.
+
+  5. Make the welcome banner taller / more spacious
+  Increasing its padding slightly and adding a subtle illustration or pattern to the right side (purely decorative SVG waves or dots) would
+  make the top section feel much more like a real product landing area.
+
+  Would you like me to implement any of these?
+
+✻ Baked for 54s
+
+❯ Please implement 1 and 2, implement 3, implement 4, implement 5                                                                              
+
+⏺ Let me read all the files I need before writing anything.
+
+  Searched for 1 pattern, read 2 files (ctrl+o to expand)
+
+⏺ Good, I have everything I need. I'll now:
+  1. Enhance NHSWelcomeBanner (more padding + richer decoration)
+  2. Add NHSSectionHeading as a shared component
+  3. Rewrite YoungPersonDashboard with hero card, stats strip, and sections
+  4. Apply section grouping to all other dashboards
+
+⏺ Good, I have everything I need. Now I'll implement all five improvements:
+
+⏺ Write(src/pages/home/YoungPersonDashboard.tsx)
+  ⎿  Added 206 lines, removed 92 lines
+      1  import { Link } from "react-router-dom";
+      2 -import { Button } from "@/components/ui/button";                                                                                                                                                
+      2  import { NHSWelcomeBanner, NHSCard } from "@/components/ui/nhs-dashboard";
+      3  import { useTodayCheckin } from "@/hooks/useCheckins";
+      4 +import { useWeeklyReview } from "@/hooks/useReview";                                                                                                                                            
+      5  import type { AuthUser } from "@/app/AuthContext";
+      6  
+      7  interface Props {
+     ...
+        9  }
+       10  
+       11  export function YoungPersonDashboard({ user }: Props) {
+       12 -  const { checkedInToday, data: todayCheckin, status } = useTodayCheckin();                                                                                                                   
+       12 +  const { checkedInToday, data: todayCheckin, status: checkinStatus } = useTodayCheckin();                                                                                                    
+       13 +  const { data: weeklyData, status: weeklyStatus } = useWeeklyReview();                                                                                                                       
+       14  
+       15 +  const lastMood =                                                                                                                                                                            
+       16 +    weeklyData?.mood_trend?.length                                                                                                                                                            
+       17 +      ? weeklyData.mood_trend[weeklyData.mood_trend.length - 1]?.mood ?? null                                                                                                                 
+       18 +      : todayCheckin?.mood_rating ?? null;                                                                                                                                                    
+       19 +                                                                                                                                                                                              
+       20    return (
+       15 -    <div className="space-y-lg">                                                                                                                                                              
+       21 +    <div className="space-y-xl">                                                                                                                                                              
+       22 +      {/* ── Welcome banner ──────────────────────────────────────────────── */}                                                                                                              
+       23        <NHSWelcomeBanner
+       24          username={user.username}
+       25          roleLabel="Your space"
+       26          message="Welcome to CBT Companion — your centralised space to understand the work you're doing and access resources shared by your practitioner."
+       27        />
+       28  
+       22 -      {/* Today's check-in */}                                                                                                                                                                
+       23 -      {status !== "loading" && checkedInToday && todayCheckin ? (                                                                                                                             
+       24 -        <div                                                                                                                                                                                  
+       25 -          className="rounded-xl border p-lg"                                                                                                                                                  
+       26 -          style={{ borderColor: "#41B6E6", backgroundColor: "rgba(65,182,230,0.06)" }}                                                                                                        
+       27 -        >                                                                                                                                                                                     
+       28 -          <p className="text-caption font-medium" style={{ color: "#005EB8" }}>                                                                                                               
+       29 -            Today's check-in                                                                                                                                                                  
+       30 -          </p>                                                                                                                                                                                
+       31 -          <div className="mt-xs flex flex-wrap gap-lg">                                                                                                                                       
+       32 -            <div>                                                                                                                                                                             
+       33 -              <p className="text-caption text-muted-foreground">Mood</p>                                                                                                                      
+       34 -              <p className="text-h2 font-semibold" style={{ color: "#003087" }}>                                                                                                              
+       35 -                {todayCheckin.mood_rating}                                                                                                                                                    
+       36 -                <span className="text-caption font-normal text-muted-foreground"> / 10</span>                                                                                                 
+       37 -              </p>                                                                                                                                                                            
+       38 -            </div>                                                                                                                                                                            
+       39 -            <div>                                                                                                                                                                             
+       40 -              <p className="text-caption text-muted-foreground">Anxiety</p>                                                                                                                   
+       41 -              <p className="text-h2 font-semibold" style={{ color: "#003087" }}>                                                                                                              
+       42 -                {todayCheckin.anxiety_rating}                                                                                                                                                 
+       43 -                <span className="text-caption font-normal text-muted-foreground"> / 10</span>                                                                                                 
+       44 -              </p>                                                                                                                                                                            
+       45 -            </div>                                                                                                                                                                            
+       46 -          </div>                                                                                                                                                                              
+       47 -          <Link                                                                                                                                                                               
+       48 -            to="/check-in"                                                                                                                                                                    
+       49 -            className="mt-sm inline-block text-caption font-medium underline-offset-2 hover:underline"                                                                                        
+       50 -            style={{ color: "#003087" }}                                                                                                                                                      
+       51 -          >                                                                                                                                                                                   
+       52 -            Check in again                                                                                                                                                                    
+       53 -          </Link>                                                                                                                                                                             
+       29 +      {/* ── 4. At-a-glance stats strip ─────────────────────────────────── */}                                                                                                               
+       30 +      {weeklyStatus === "success" && weeklyData && (                                                                                                                                          
+       31 +        <div className="flex flex-wrap gap-sm">                                                                                                                                               
+       32 +          <StatChip label="Check-ins this week" value={String(weeklyData.checkins_completed)} icon="📋" />                                                                                    
+       33 +          <StatChip label="Activities completed" value={String(weeklyData.activities_completed)} icon="✅" />                                                                                 
+       34 +          {lastMood !== null && (                                                                                                                                                             
+       35 +            <StatChip label="Last mood" value={`${lastMood} / 10`} icon="💙" />                                                                                                               
+       36 +          )}                                                                                                                                                                                  
+       37          </div>
+       55 -      ) : (                                                                                                                                                                                   
+       56 -        <Link to="/check-in">                                                                                                                                                                 
+       57 -          <Button                                                                                                                                                                             
+       58 -            className="w-full sm:w-auto text-white font-semibold"                                                                                                                             
+       59 -            size="lg"                                                                                                                                                                         
+       60 -            style={{ backgroundColor: "#003087" }}                                                                                                                                            
+       61 -          >                                                                                                                                                                                   
+       62 -            How are you feeling today?                                                                                                                                                        
+       63 -          </Button>                                                                                                                                                                           
+       64 -        </Link>                                                                                                                                                                               
+       38        )}
+       39  
+       67 -      {/* Section cards */}                                                                                                                                                                   
+       68 -      <div className="grid gap-md sm:grid-cols-2">                                                                                                                                            
+       69 -        <NHSCard                                                                                                                                                                              
+       70 -          icon="📋"                                                                                                                                                                           
+       71 -          title="Mood Check-In"                                                                                                                                                               
+       72 -          description="Record how you're feeling today — mood, anxiety, emotions, and what's been going on."                                                                                  
+       73 -          linkTo="/check-in"                                                                                                                                                                  
+       74 -          linkLabel="Start check-in"                                                                                                                                                          
+       75 -          color="blue"                                                                                                                                                                        
+       40 +      {/* ── 1. Hero check-in card ───────────────────────────────────────── */}                                                                                                              
+       41 +      {checkinStatus !== "loading" && (                                                                                                                                                       
+       42 +        checkedInToday && todayCheckin                                                                                                                                                        
+       43 +          ? <CheckedInHero mood={todayCheckin.mood_rating} anxiety={todayCheckin.anxiety_rating} />                                                                                           
+       44 +          : <CheckInHero />                                                                                                                                                                   
+       45 +      )}                                                                                                                                                                                      
+       46 +                                                                                                                                                                                              
+       47 +      {/* ── 3. Your tools ──────────────────────────────────────────────── */}                                                                                                               
+       48 +      <section>                                                                                                                                                                               
+       49 +        <SectionDivider label="Your tools" />                                                                                                                                                 
+       50 +        <div className="grid gap-md sm:grid-cols-2">                                                                                                                                          
+       51 +          <NHSCard                                                                                                                                                                            
+       52 +            icon="📋"                                                                                                                                                                         
+       53 +            title="Mood Check-In"                                                                                                                                                             
+       54 +            description="Record how you're feeling today — mood, anxiety, emotions, and what's been going on."                                                                                
+       55 +            linkTo="/check-in"                                                                                                                                                                
+       56 +            linkLabel="Start check-in"                                                                                                                                                        
+       57 +            color="blue"                                                                                                                                                                      
+       58 +          />                                                                                                                                                                                  
+       59 +          <NHSCard                                                                                                                                                                            
+       60 +            icon="📊"                                                                                                                                                                         
+       61 +            title="Your Past Week"                                                                                                                                                            
+       62 +            description="See a summary of your recent check-ins and the activities you've completed."                                                                                         
+       63 +            linkTo="/review"                                                                                                                                                                  
+       64 +            linkLabel="View review"                                                                                                                                                           
+       65 +            color="lavender"                                                                                                                                                                  
+       66 +          />                                                                                                                                                                                  
+       67 +          <NHSCard                                                                                                                                                                            
+       68 +            icon="🔍"                                                                                                                                                                         
+       69 +            title="Patterns"                                                                                                                                                                  
+       70 +            description="Notice any trends in how you've been feeling and get prompts if something stands out."                                                                               
+       71 +            linkTo="/patterns"                                                                                                                                                                
+       72 +            linkLabel="View patterns"                                                                                                                                                         
+       73 +            color="teal"                                                                                                                                                                      
+       74 +          />                                                                                                                                                                                  
+       75 +          <NHSCard                                                                                                                                                                            
+       76 +            icon="📚"                                                                                                                                                                         
+       77 +            title="Resources"                                                                                                                                                                 
+       78 +            description="Explore CBT guides, psychoeducation, and printable worksheets from your programme."                                                                                  
+       79 +            linkTo="/resources"                                                                                                                                                               
+       80 +            linkLabel="Browse resources"                                                                                                                                                      
+       81 +            color="navy"                                                                                                                                                                      
+       82 +          />                                                                                                                                                                                  
+       83 +        </div>                                                                                                                                                                                
+       84 +      </section>                                                                                                                                                                              
+       85 +                                                                                                                                                                                              
+       86 +      {/* ── 3. Support ─────────────────────────────────────────────────── */}                                                                                                               
+       87 +      <section>                                                                                                                                                                               
+       88 +        <SectionDivider label="Support" />                                                                                                                                                    
+       89 +        <div className="grid gap-md sm:grid-cols-2">                                                                                                                                          
+       90 +          <NHSCard                                                                                                                                                                            
+       91 +            icon="🤝"                                                                                                                                                                         
+       92 +            title="Session Companion"                                                                                                                                                         
+       93 +            description="Join a live session started by your practitioner using the session code they give you."                                                                              
+       94 +            linkTo="/session-companion/join"                                                                                                                                                  
+       95 +            linkLabel="Join a session"                                                                                                                                                        
+       96 +            color="sand"                                                                                                                                                                      
+       97 +          />                                                                                                                                                                                  
+       98 +          <NHSCard                                                                                                                                                                            
+       99 +            icon="💛"                                                                                                                                                                         
+      100 +            title="Help and Support"                                                                                                                                                          
+      101 +            description="Find support contacts and guidance for difficult moments — including urgent help."                                                                                   
+      102 +            linkTo="/support"                                                                                                                                                                 
+      103 +            linkLabel="Get support"                                                                                                                                                           
+      104 +            color="teal"                                                                                                                                                                      
+      105 +          />                                                                                                                                                                                  
+      106 +        </div>                                                                                                                                                                                
+      107 +      </section>                                                                                                                                                                              
+      108 +    </div>                                                                                                                                                                                    
+      109 +  );                                                                                                                                                                                          
+      110 +}                                                                                                                                                                                             
+      111 +                                                                                                                                                                                              
+      112 +// ── Section divider ───────────────────────────────────────────────────────────                                                                                                             
+      113 +                                                                                                                                                                                              
+      114 +function SectionDivider({ label }: { label: string }) {                                                                                                                                       
+      115 +  return (                                                                                                                                                                                    
+      116 +    <div className="mb-md flex items-center gap-md">                                                                                                                                          
+      117 +      <p className="whitespace-nowrap text-caption font-semibold uppercase tracking-widest text-muted-foreground">                                                                            
+      118 +        {label}                                                                                                                                                                               
+      119 +      </p>                                                                                                                                                                                    
+      120 +      <div className="h-px flex-1 rounded-full bg-border" />                                                                                                                                  
+      121 +    </div>                                                                                                                                                                                    
+      122 +  );                                                                                                                                                                                          
+      123 +}                                                                                                                                                                                             
+      124 +                                                                                                                                                                                              
+      125 +// ── Stats chip ────────────────────────────────────────────────────────────────                                                                                                             
+      126 +                                                                                                                                                                                              
+      127 +function StatChip({ label, value, icon }: { label: string; value: string; icon: string }) {                                                                                                   
+      128 +  return (                                                                                                                                                                                    
+      129 +    <div className="flex items-center gap-sm rounded-full border border-border bg-card px-md py-xs shadow-xs">                                                                                
+      130 +      <span aria-hidden="true" className="text-base leading-none">{icon}</span>                                                                                                               
+      131 +      <span className="text-caption text-muted-foreground">{label}:</span>                                                                                                                    
+      132 +      <span className="text-caption font-semibold text-foreground">{value}</span>                                                                                                             
+      133 +    </div>                                                                                                                                                                                    
+      134 +  );                                                                                                                                                                                          
+      135 +}                                                                                                                                                                                             
+      136 +                                                                                                                                                                                              
+      137 +// ── Hero: not yet checked in ──────────────────────────────────────────────────                                                                                                             
+      138 +                                                                                                                                                                                              
+      139 +function CheckInHero() {                                                                                                                                                                      
+      140 +  return (                                                                                                                                                                                    
+      141 +    <Link to="/check-in" className="group block">                                                                                                                                             
+      142 +      <div                                                                                                                                                                                    
+      143 +        className="relative overflow-hidden rounded-2xl p-xl text-white shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"                               
+      144 +        style={{ background: "linear-gradient(135deg, #003087 0%, #005EB8 55%, #0072CE 100%)" }}                                                                                              
+      145 +      >                                                                                                                                                                                       
+      146 +        {/* Decorative shapes */}                                                                                                                                                             
+      147 +        <div                                                                                                                                                                                  
+      148 +          aria-hidden="true"                                                                                                                                                                  
+      149 +          className="pointer-events-none absolute -right-8 -top-8 h-48 w-48 rounded-full opacity-10"                                                                                          
+      150 +          style={{ background: "radial-gradient(circle, #41B6E6, transparent)" }}                                                                                                             
+      151          />
+       77 -        <NHSCard                                                                                                                                                                              
+       78 -          icon="📊"                                                                                                                                                                           
+       79 -          title="Your Past Week"                                                                                                                                                              
+       80 -          description="See a summary of your recent check-ins and the activities you've completed."                                                                                           
+       81 -          linkTo="/review"                                                                                                                                                                    
+       82 -          linkLabel="View review"                                                                                                                                                             
+       83 -          color="lavender"                                                                                                                                                                    
+      152 +        <div                                                                                                                                                                                  
+      153 +          aria-hidden="true"                                                                                                                                                                  
+      154 +          className="pointer-events-none absolute -bottom-12 right-12 h-40 w-40 rounded-full opacity-[0.07]"                                                                                  
+      155 +          style={{ background: "radial-gradient(circle, #ffffff, transparent)" }}                                                                                                             
+      156          />
+       85 -        <NHSCard                                                                                                                                                                              
+       86 -          icon="🔍"                                                                                                                                                                           
+       87 -          title="Patterns"                                                                                                                                                                    
+       88 -          description="Notice any trends in how you've been feeling and get prompts if something stands out."                                                                                 
+       89 -          linkTo="/patterns"                                                                                                                                                                  
+       90 -          linkLabel="View patterns"                                                                                                                                                           
+       91 -          color="teal"                                                                                                                                                                        
+      157 +        <div                                                                                                                                                                                  
+      158 +          aria-hidden="true"                                                                                                                                                                  
+      159 +          className="pointer-events-none absolute bottom-0 right-0 h-24 w-24 rounded-tl-full opacity-[0.05]"                                                                                  
+      160 +          style={{ backgroundColor: "#41B6E6" }}                                                                                                                                              
+      161          />
+       93 -        <NHSCard                                                                                                                                                                              
+       94 -          icon="📚"                                                                                                                                                                           
+       95 -          title="Resources"                                                                                                                                                                   
+       96 -          description="Explore CBT guides, psychoeducation, and printable worksheets from your programme."                                                                                    
+       97 -          linkTo="/resources"                                                                                                                                                                 
+       98 -          linkLabel="Browse resources"                                                                                                                                                        
+       99 -          color="navy"                                                                                                                                                                        
+      100 -        />                                                                                                                                                                                    
+      101 -        <NHSCard                                                                                                                                                                              
+      102 -          icon="🤝"                                                                                                                                                                           
+      103 -          title="Session Companion"                                                                                                                                                           
+      104 -          description="Join a live session started by your practitioner using the session code they give you."                                                                                
+      105 -          linkTo="/session-companion/join"                                                                                                                                                    
+      106 -          linkLabel="Join a session"                                                                                                                                                          
+      107 -          color="sand"                                                                                                                                                                        
+      108 -        />                                                                                                                                                                                    
+      109 -        <NHSCard                                                                                                                                                                              
+      110 -          icon="💛"                                                                                                                                                                           
+      111 -          title="Help and Support"                                                                                                                                                            
+      112 -          description="Find support contacts and guidance for difficult moments — including urgent help."                                                                                     
+      113 -          linkTo="/support"                                                                                                                                                                   
+      114 -          linkLabel="Get support"                                                                                                                                                             
+      115 -          color="teal"                                                                                                                                                                        
+      116 -        />                                                                                                                                                                                    
+      162 +                                                                                                                                                                                              
+      163 +        <p className="relative text-caption font-medium" style={{ color: "rgba(255,255,255,0.70)" }}>                                                                                         
+      164 +          Daily check-in                                                                                                                                                                      
+      165 +        </p>                                                                                                                                                                                  
+      166 +        <h2 className="relative mt-xs text-h2 font-bold text-white">                                                                                                                          
+      167 +          How are you feeling today?                                                                                                                                                          
+      168 +        </h2>                                                                                                                                                                                 
+      169 +        <p className="relative mt-sm text-body" style={{ color: "rgba(255,255,255,0.80)" }}>                                                                                                  
+      170 +          Track your mood and build your weekly picture.                                                                                                                                      
+      171 +        </p>                                                                                                                                                                                  
+      172 +                                                                                                                                                                                              
+      173 +        <div                                                                                                                                                                                  
+      174 +          className="relative mt-lg inline-flex items-center gap-sm rounded-xl bg-white px-lg py-sm text-body font-semibold shadow-xs transition-transform duration-micro group-hover:translat
+          +e-x-1"                                                                                                                                                                                        
+      175 +          style={{ color: "#003087" }}                                                                                                                                                        
+      176 +        >                                                                                                                                                                                     
+      177 +          Start check-in                                                                                                                                                                      
+      178 +          <span aria-hidden="true">→</span>                                                                                                                                                   
+      179 +        </div>                                                                                                                                                                                
+      180        </div>
+      181 +    </Link>                                                                                                                                                                                   
+      182 +  );                                                                                                                                                                                          
+      183 +}                                                                                                                                                                                             
+      184 +                                                                                                                                                                                              
+      185 +// ── Hero: already checked in ──────────────────────────────────────────────────                                                                                                             
+      186 +                                                                                                                                                                                              
+      187 +function CheckedInHero({ mood, anxiety }: { mood: number; anxiety: number }) {                                                                                                                
+      188 +  return (                                                                                                                                                                                    
+      189 +    <div                                                                                                                                                                                      
+      190 +      className="rounded-2xl border p-xl shadow-card"                                                                                                                                         
+      191 +      style={{                                                                                                                                                                                
+      192 +        borderColor: "#41B6E6",                                                                                                                                                               
+      193 +        background: "linear-gradient(135deg, rgba(65,182,230,0.09) 0%, rgba(65,182,230,0.02) 100%)",                                                                                          
+      194 +      }}                                                                                                                                                                                      
+      195 +    >                                                                                                                                                                                         
+      196 +      <div className="flex items-start justify-between">                                                                                                                                      
+      197 +        <div>                                                                                                                                                                                 
+      198 +          <p className="text-caption font-semibold" style={{ color: "#005EB8" }}>                                                                                                             
+      199 +            Today's check-in                                                                                                                                                                  
+      200 +          </p>                                                                                                                                                                                
+      201 +          <p className="mt-xs text-body text-muted-foreground">                                                                                                                               
+      202 +            You've already checked in today — well done.                                                                                                                                      
+      203 +          </p>                                                                                                                                                                                
+      204 +        </div>                                                                                                                                                                                
+      205 +        <span className="text-2xl" aria-hidden="true">✓</span>                                                                                                                                
+      206 +      </div>                                                                                                                                                                                  
+      207 +                                                                                                                                                                                              
+      208 +      <div className="mt-lg flex flex-wrap gap-xl">                                                                                                                                           
+      209 +        <div>                                                                                                                                                                                 
+      210 +          <p className="text-caption text-muted-foreground">Mood</p>                                                                                                                          
+      211 +          <p className="text-h1 font-bold" style={{ color: "#003087" }}>                                                                                                                      
+      212 +            {mood}                                                                                                                                                                            
+      213 +            <span className="text-body font-normal text-muted-foreground"> / 10</span>                                                                                                        
+      214 +          </p>                                                                                                                                                                                
+      215 +        </div>                                                                                                                                                                                
+      216 +        <div>                                                                                                                                                                                 
+      217 +          <p className="text-caption text-muted-foreground">Anxiety</p>                                                                                                                       
+      218 +          <p className="text-h1 font-bold" style={{ color: "#003087" }}>                                                                                                                      
+      219 +            {anxiety}                                                                                                                                                                         
+      220 +            <span className="text-body font-normal text-muted-foreground"> / 10</span>                                                                                                        
+      221 +          </p>                                                                                                                                                                                
+      222 +        </div>                                                                                                                                                                                
+      223 +      </div>                                                                                                                                                                                  
+      224 +                                                                                                                                                                                              
+      225 +      <Link                                                                                                                                                                                   
+      226 +        to="/check-in"                                                                                                                                                                        
+      227 +        className="mt-md inline-block text-caption font-medium underline-offset-2 hover:underline"                                                                                            
+      228 +        style={{ color: "#003087" }}                                                                                                                                                          
+      229 +      >                                                                                                                                                                                       
+      230 +        Check in again                                                                                                                                                                        
+      231 +      </Link>                                                                                                                                                                                 
+      232      </div>
+      233    );
+      234  }
+
+⏺ Now update the welcome banner — taller, more breathing room, richer decorative layer:
+
+⏺ Update(src/components/ui/nhs-dashboard.tsx)
+  ⎿  Added 34 lines, removed 17 lines
+       36  export function NHSWelcomeBanner({ username, roleLabel, message }: BannerProps) {
+       37    return (
+       38      <div
+       39 -      className="relative overflow-hidden rounded-2xl px-xl py-xl text-white"                                                                                                                 
+       39 +      className="relative overflow-hidden rounded-2xl px-xl pt-xl pb-xxl text-white"                                                                                                          
+       40        style={{ background: "linear-gradient(135deg, #003087 0%, #005EB8 60%, #0072CE 100%)" }}
+       41      >
+       42 -      {/* Decorative background shapes */}                                                                                                                                                    
+       42 +      {/* ── Decorative layer ── */}                                                                                                                                                          
+       43 +      {/* Large halo top-right */}                                                                                                                                                            
+       44        <div
+       45          aria-hidden="true"
+       45 -        className="pointer-events-none absolute -right-8 -top-8 h-48 w-48 rounded-full opacity-10"                                                                                            
+       46 +        className="pointer-events-none absolute -right-12 -top-12 h-64 w-64 rounded-full opacity-10"                                                                                          
+       47          style={{ background: "radial-gradient(circle, #41B6E6, transparent)" }}
+       48        />
+       49 +      {/* Mid circle bottom-right */}                                                                                                                                                         
+       50        <div
+       51          aria-hidden="true"
+       50 -        className="pointer-events-none absolute -bottom-10 right-24 h-32 w-32 rounded-full opacity-[0.07]"                                                                                    
+       52 +        className="pointer-events-none absolute -bottom-16 right-8 h-48 w-48 rounded-full opacity-[0.08]"                                                                                     
+       53          style={{ background: "radial-gradient(circle, #ffffff, transparent)" }}
+       54        />
+       55 +      {/* Large decorative disc — partially visible in bottom-right corner */}                                                                                                                
+       56 +      <div                                                                                                                                                                                    
+       57 +        aria-hidden="true"                                                                                                                                                                    
+       58 +        className="pointer-events-none absolute -bottom-20 -right-20 h-56 w-56 rounded-full border-2 opacity-[0.12]"                                                                          
+       59 +        style={{ borderColor: "#41B6E6" }}                                                                                                                                                    
+       60 +      />                                                                                                                                                                                      
+       61 +      {/* Small accent dot top-left */}                                                                                                                                                       
+       62 +      <div                                                                                                                                                                                    
+       63 +        aria-hidden="true"                                                                                                                                                                    
+       64 +        className="pointer-events-none absolute left-xl top-xl h-2 w-2 rounded-full opacity-30"                                                                                               
+       65 +        style={{ backgroundColor: "#41B6E6" }}                                                                                                                                                
+       66 +      />                                                                                                                                                                                      
+       67  
+       54 -      {/* NHS branding row */}                                                                                                                                                                
+       55 -      <div className="relative flex items-center gap-sm mb-lg">                                                                                                                               
+       68 +      {/* ── NHS branding row ── */}                                                                                                                                                          
+       69 +      <div className="relative mb-xl flex items-center gap-md">                                                                                                                               
+       70          <NHSLozenge size="lg" />
+       57 -        <span className="text-body font-bold tracking-wide" style={{ color: "rgba(255,255,255,0.85)" }}>                                                                                      
+       58 -          CBT Companion                                                                                                                                                                       
+       59 -        </span>                                                                                                                                                                               
+       71 +        <div>                                                                                                                                                                                 
+       72 +          <p className="text-body font-bold leading-tight text-white">CBT Companion</p>                                                                                                       
+       73 +          <p className="text-caption leading-tight" style={{ color: "rgba(255,255,255,0.60)" }}>                                                                                              
+       74 +            CAMHS digital support tool                                                                                                                                                        
+       75 +          </p>                                                                                                                                                                                
+       76 +        </div>                                                                                                                                                                                
+       77        </div>
+       78  
+       62 -      {/* Greeting */}                                                                                                                                                                        
+       63 -      <p className="relative text-caption font-medium" style={{ color: "rgba(255,255,255,0.65)" }}>                                                                                           
+       79 +      {/* ── Greeting ── */}                                                                                                                                                                  
+       80 +      <p className="relative text-caption font-semibold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.55)" }}>                                                               
+       81          {roleLabel}
+       82        </p>
+       66 -      <h1 className="relative mt-xs text-h1 font-bold text-white">                                                                                                                            
+       83 +      <h1 className="relative mt-sm text-h1 font-bold text-white">                                                                                                                            
+       84          Hi, {username}
+       85        </h1>
+       86        <p
+       70 -        className="relative mt-sm text-body leading-relaxed max-w-xl"                                                                                                                         
+       71 -        style={{ color: "rgba(255,255,255,0.85)" }}                                                                                                                                           
+       87 +        className="relative mt-sm max-w-lg text-body leading-relaxed"                                                                                                                         
+       88 +        style={{ color: "rgba(255,255,255,0.80)" }}                                                                                                                                           
+       89        >
+       90          {message}
+       91        </p>
+       92  
+       76 -      {/* Bottom accent line */}                                                                                                                                                              
+       93 +      {/* ── Bottom accent line ── */}                                                                                                                                                        
+       94        <div
+       95          aria-hidden="true"
+       79 -        className="relative mt-lg h-px w-16 rounded-full opacity-50"                                                                                                                          
+       80 -        style={{ backgroundColor: "#41B6E6" }}                                                                                                                                                
+       96 +        className="relative mt-xl h-0.5 w-20 rounded-full"                                                                                                                                    
+       97 +        style={{ backgroundColor: "#41B6E6", opacity: 0.6 }}                                                                                                                                  
+       98        />
+       99      </div>
+      100    );
+
+⏺ Now apply section grouping to the other dashboards too so they're consistent:
+
+  Read 1 file (ctrl+o to expand)
+
+⏺ Write(src/pages/home/AdminDashboard.tsx)
+  ⎿  Added 56 lines, removed 36 lines
+       5    user: AuthUser;
+       6  }
+       7  
+       8 +function SectionDivider({ label }: { label: string }) {                                                                                                                                        
+       9 +  return (                                                                                                                                                                                     
+      10 +    <div className="mb-md flex items-center gap-md">                                                                                                                                           
+      11 +      <p className="whitespace-nowrap text-caption font-semibold uppercase tracking-widest text-muted-foreground">                                                                             
+      12 +        {label}                                                                                                                                                                                
+      13 +      </p>                                                                                                                                                                                     
+      14 +      <div className="h-px flex-1 rounded-full bg-border" />                                                                                                                                   
+      15 +    </div>                                                                                                                                                                                     
+      16 +  );                                                                                                                                                                                           
+      17 +}                                                                                                                                                                                              
+      18 +                                                                                                                                                                                               
+      19  export function AdminDashboard({ user }: Props) {
+      20    return (
+      10 -    <div className="space-y-lg">                                                                                                                                                               
+      21 +    <div className="space-y-xl">                                                                                                                                                               
+      22        <NHSWelcomeBanner
+      23          username={user.username}
+      24          roleLabel="Administrator"
+      14 -        message="Welcome to CBT Companion — your centralised system to prepare for sessions, access clinical documents, and support your work with young people."                              
+      25 +        message="Welcome to CBT Companion — your centralised system to manage content, run sessions, and support your service."                                                                
+      26        />
+      27  
+      17 -      <div className="grid gap-md sm:grid-cols-2">                                                                                                                                             
+      18 -        <NHSCard                                                                                                                                                                               
+      19 -          icon="🗂️ "                                                                                                                                                                            
+      20 -          title="Content Management"                                                                                                                                                           
+      21 -          description="Add, edit, publish, and archive resources and worksheets across all four programme categories."                                                                         
+      22 -          linkTo="/admin/resources"                                                                                                                                                            
+      23 -          linkLabel="Manage resources"                                                                                                                                                         
+      24 -          color="navy"                                                                                                                                                                         
+      25 -        />                                                                                                                                                                                     
+      26 -<NHSCard                                                                                                                                                                                       
+      27 -          icon="📚"                                                                                                                                                                            
+      28 -          title="Resources"                                                                                                                                                                    
+      29 -          description="Browse the live resource library as it appears to users."                                                                                                               
+      30 -          linkTo="/resources"                                                                                                                                                                  
+      31 -          linkLabel="Browse resources"                                                                                                                                                         
+      32 -          color="blue"                                                                                                                                                                         
+      33 -        />                                                                                                                                                                                     
+      34 -        <NHSCard                                                                                                                                                                               
+      35 -          icon="🤝"                                                                                                                                                                            
+      36 -          title="Session Companion"                                                                                                                                                            
+      37 -          description="Start a live collaborative session with a young person using a temporary shared session code."                                                                          
+      38 -          linkTo="/session-companion/start"                                                                                                                                                    
+      39 -          linkLabel="Start a session"                                                                                                                                                          
+      40 -          color="sand"                                                                                                                                                                         
+      41 -        />                                                                                                                                                                                     
+      42 -        <NHSCard                                                                                                                                                                               
+      43 -          icon="💛"                                                                                                                                                                            
+      44 -          title="Help and Support"                                                                                                                                                             
+      45 -          description="Support contacts and documentation for using and administering CBT Companion."                                                                                          
+      46 -          linkTo="/support"                                                                                                                                                                    
+      47 -          linkLabel="Get support"                                                                                                                                                              
+      48 -          color="lavender"                                                                                                                                                                     
+      49 -        />                                                                                                                                                                                     
+      50 -      </div>                                                                                                                                                                                   
+      28 +      <section>                                                                                                                                                                                
+      29 +        <SectionDivider label="Management" />                                                                                                                                                  
+      30 +        <div className="grid gap-md sm:grid-cols-2">                                                                                                                                           
+      31 +          <NHSCard                                                                                                                                                                             
+      32 +            icon="🗂️ "                                                                                                                                                                          
+      33 +            title="Content Management"                                                                                                                                                         
+      34 +            description="Add, edit, publish, and archive resources and worksheets across all four programme categories."                                                                       
+      35 +            linkTo="/admin/resources"                                                                                                                                                          
+      36 +            linkLabel="Manage resources"                                                                                                                                                       
+      37 +            color="navy"                                                                                                                                                                       
+      38 +          />                                                                                                                                                                                   
+      39 +          <NHSCard                                                                                                                                                                             
+      40 +            icon="📚"                                                                                                                                                                          
+      41 +            title="Resources"                                                                                                                                                                  
+      42 +            description="Browse the live resource library as it appears to users."                                                                                                             
+      43 +            linkTo="/resources"                                                                                                                                                                
+      44 +            linkLabel="Browse resources"                                                                                                                                                       
+      45 +            color="blue"                                                                                                                                                                       
+      46 +          />                                                                                                                                                                                   
+      47 +        </div>                                                                                                                                                                                 
+      48 +      </section>                                                                                                                                                                               
+      49 +                                                                                                                                                                                               
+      50 +      <section>                                                                                                                                                                                
+      51 +        <SectionDivider label="Clinical tools" />                                                                                                                                              
+      52 +        <div className="grid gap-md sm:grid-cols-2">                                                                                                                                           
+      53 +          <NHSCard                                                                                                                                                                             
+      54 +            icon="🤝"                                                                                                                                                                          
+      55 +            title="Session Companion"                                                                                                                                                          
+      56 +            description="Start a live collaborative session with a young person using a temporary shared session code."                                                                        
+      57 +            linkTo="/session-companion/start"                                                                                                                                                  
+      58 +            linkLabel="Start a session"                                                                                                                                                        
+      59 +            color="sand"                                                                                                                                                                       
+      60 +          />                                                                                                                                                                                   
+      61 +          <NHSCard                                                                                                                                                                             
+      62 +            icon="💛"                                                                                                                                                                          
+      63 +            title="Help and Support"                                                                                                                                                           
+      64 +            description="Support contacts and documentation for using and administering CBT Companion."                                                                                        
+      65 +            linkTo="/support"                                                                                                                                                                  
+      66 +            linkLabel="Get support"                                                                                                                                                            
+      67 +            color="lavender"                                                                                                                                                                   
+      68 +          />                                                                                                                                                                                   
+      69 +        </div>                                                                                                                                                                                 
+      70 +      </section>                                                                                                                                                                               
+      71      </div>
+      72    );
+      73  }
+
+⏺ Write(src/pages/home/PractitionerDashboard.tsx)
+  ⎿  Added 41 lines, removed 27 lines
+       5    user: AuthUser;
+       6  }
+       7  
+       8 +function SectionDivider({ label }: { label: string }) {                                                                                                                                        
+       9 +  return (                                                                                                                                                                                     
+      10 +    <div className="mb-md flex items-center gap-md">                                                                                                                                           
+      11 +      <p className="whitespace-nowrap text-caption font-semibold uppercase tracking-widest text-muted-foreground">                                                                             
+      12 +        {label}                                                                                                                                                                                
+      13 +      </p>                                                                                                                                                                                     
+      14 +      <div className="h-px flex-1 rounded-full bg-border" />                                                                                                                                   
+      15 +    </div>                                                                                                                                                                                     
+      16 +  );                                                                                                                                                                                           
+      17 +}                                                                                                                                                                                              
+      18 +                                                                                                                                                                                               
+      19  export function PractitionerDashboard({ user }: Props) {
+      20    return (
+      10 -    <div className="space-y-lg">                                                                                                                                                               
+      21 +    <div className="space-y-xl">                                                                                                                                                               
+      22        <NHSWelcomeBanner
+      23          username={user.username}
+      24          roleLabel="Practitioner"
+      25          message="Welcome to CBT Companion — your centralised system to prepare for sessions, access clinical documents, and support your work with young people."
+      26        />
+      27  
+      17 -      <div className="grid gap-md sm:grid-cols-3">                                                                                                                                             
+      18 -        <NHSCard                                                                                                                                                                               
+      19 -          icon="🤝"                                                                                                                                                                            
+      20 -          title="Session Companion"                                                                                                                                                            
+      21 -          description="Start a live collaborative session with a young person using a temporary shared session code."                                                                          
+      22 -          linkTo="/session-companion/start"                                                                                                                                                    
+      23 -          linkLabel="Start a session"                                                                                                                                                          
+      24 -          color="sand"                                                                                                                                                                         
+      25 -        />                                                                                                                                                                                     
+      26 -        <NHSCard                                                                                                                                                                               
+      27 -          icon="📚"                                                                                                                                                                            
+      28 -          title="Resources"                                                                                                                                                                    
+      29 -          description="Browse CBT manuals, psychoeducation guides, and printable activity worksheets."                                                                                         
+      30 -          linkTo="/resources"                                                                                                                                                                  
+      31 -          linkLabel="Browse resources"                                                                                                                                                         
+      32 -          color="navy"                                                                                                                                                                         
+      33 -        />                                                                                                                                                                                     
+      34 -<NHSCard                                                                                                                                                                                       
+      35 -          icon="💛"                                                                                                                                                                            
+      36 -          title="Help and Support"                                                                                                                                                             
+      37 -          description="Guidance on using CBT Companion safely and effectively in your clinical practice."                                                                                      
+      38 -          linkTo="/support"                                                                                                                                                                    
+      39 -          linkLabel="Get support"                                                                                                                                                              
+      40 -          color="lavender"                                                                                                                                                                     
+      41 -        />                                                                                                                                                                                     
+      42 -      </div>                                                                                                                                                                                   
+      28 +      <section>                                                                                                                                                                                
+      29 +        <SectionDivider label="Clinical tools" />                                                                                                                                              
+      30 +        <div className="grid gap-md sm:grid-cols-3">                                                                                                                                           
+      31 +          <NHSCard                                                                                                                                                                             
+      32 +            icon="🤝"                                                                                                                                                                          
+      33 +            title="Session Companion"                                                                                                                                                          
+      34 +            description="Start a live collaborative session with a young person using a temporary shared session code."                                                                        
+      35 +            linkTo="/session-companion/start"                                                                                                                                                  
+      36 +            linkLabel="Start a session"                                                                                                                                                        
+      37 +            color="sand"                                                                                                                                                                       
+      38 +          />                                                                                                                                                                                   
+      39 +          <NHSCard                                                                                                                                                                             
+      40 +            icon="📚"                                                                                                                                                                          
+      41 +            title="Resources"                                                                                                                                                                  
+      42 +            description="Browse CBT manuals, psychoeducation guides, and printable activity worksheets."                                                                                       
+      43 +            linkTo="/resources"                                                                                                                                                                
+      44 +            linkLabel="Browse resources"                                                                                                                                                       
+      45 +            color="navy"                                                                                                                                                                       
+      46 +          />                                                                                                                                                                                   
+      47 +          <NHSCard                                                                                                                                                                             
+      48 +            icon="💛"                                                                                                                                                                          
+      49 +            title="Help and Support"                                                                                                                                                           
+      50 +            description="Guidance on using CBT Companion safely and effectively in your clinical practice."                                                                                    
+      51 +            linkTo="/support"                                                                                                                                                                  
+      52 +            linkLabel="Get support"                                                                                                                                                            
+      53 +            color="lavender"                                                                                                                                                                   
+      54 +          />                                                                                                                                                                                   
+      55 +        </div>                                                                                                                                                                                 
+      56 +      </section>                                                                                                                                                                               
+      57      </div>
+      58    );
+      59  }
+
+⏺ Write(src/pages/home/TraineePractitionerDashboard.tsx)
+  ⎿  Added 55 lines, removed 35 lines
+       5    user: AuthUser;
+       6  }
+       7  
+       8 +function SectionDivider({ label }: { label: string }) {                                                                                                                                        
+       9 +  return (                                                                                                                                                                                     
+      10 +    <div className="mb-md flex items-center gap-md">                                                                                                                                           
+      11 +      <p className="whitespace-nowrap text-caption font-semibold uppercase tracking-widest text-muted-foreground">                                                                             
+      12 +        {label}                                                                                                                                                                                
+      13 +      </p>                                                                                                                                                                                     
+      14 +      <div className="h-px flex-1 rounded-full bg-border" />                                                                                                                                   
+      15 +    </div>                                                                                                                                                                                     
+      16 +  );                                                                                                                                                                                           
+      17 +}                                                                                                                                                                                              
+      18 +                                                                                                                                                                                               
+      19  export function TraineePractitionerDashboard({ user }: Props) {
+      20    return (
+      10 -    <div className="space-y-lg">                                                                                                                                                               
+      21 +    <div className="space-y-xl">                                                                                                                                                               
+      22        <NHSWelcomeBanner
+      23          username={user.username}
+      24          roleLabel="Trainee practitioner"
+      25          message="Welcome to CBT Companion — your centralised system to prepare for sessions, access clinical documents, and support your work with young people."
+      26        />
+      27  
+      17 -      <div className="grid gap-md sm:grid-cols-2">                                                                                                                                             
+      18 -        <NHSCard                                                                                                                                                                               
+      19 -          icon="🤝"                                                                                                                                                                            
+      20 -          title="Session Companion"                                                                                                                                                            
+      21 -          description="Start a live collaborative session with a young person using a temporary shared session code."                                                                          
+      22 -          linkTo="/session-companion/start"                                                                                                                                                    
+      23 -          linkLabel="Start a session"                                                                                                                                                          
+      24 -          color="sand"                                                                                                                                                                         
+      25 -        />                                                                                                                                                                                     
+      26 -        <NHSCard                                                                                                                                                                               
+      27 -          icon="📚"                                                                                                                                                                            
+      28 -          title="Resources"                                                                                                                                                                    
+      29 -          description="Browse CBT manuals, psychoeducation guides, and printable activity worksheets."                                                                                         
+      30 -          linkTo="/resources"                                                                                                                                                                  
+      31 -          linkLabel="Browse resources"                                                                                                                                                         
+      32 -          color="navy"                                                                                                                                                                         
+      33 -        />                                                                                                                                                                                     
+      34 -        <NHSCard                                                                                                                                                                               
+      35 -          icon="🎓"                                                                                                                                                                            
+      36 -          title="Assignments &amp; Top Tips"                                                                                                                                                   
+      37 -          description="Track your training assignments, review key clinical reminders, and access session scripts."                                                                            
+      38 -          linkTo="/training"                                                                                                                                                                   
+      39 -          linkLabel="View training"                                                                                                                                                            
+      40 -          color="blue"                                                                                                                                                                         
+      41 -        />                                                                                                                                                                                     
+      42 -<NHSCard                                                                                                                                                                                       
+      43 -          icon="💛"                                                                                                                                                                            
+      44 -          title="Help and Support"                                                                                                                                                             
+      45 -          description="Guidance on using CBT Companion safely and effectively in your clinical practice."                                                                                      
+      46 -          linkTo="/support"                                                                                                                                                                    
+      47 -          linkLabel="Get support"                                                                                                                                                              
+      48 -          color="lavender"                                                                                                                                                                     
+      49 -        />                                                                                                                                                                                     
+      50 -      </div>                                                                                                                                                                                   
+      28 +      <section>                                                                                                                                                                                
+      29 +        <SectionDivider label="Clinical tools" />                                                                                                                                              
+      30 +        <div className="grid gap-md sm:grid-cols-2">                                                                                                                                           
+      31 +          <NHSCard                                                                                                                                                                             
+      32 +            icon="🤝"                                                                                                                                                                          
+      33 +            title="Session Companion"                                                                                                                                                          
+      34 +            description="Start a live collaborative session with a young person using a temporary shared session code."                                                                        
+      35 +            linkTo="/session-companion/start"                                                                                                                                                  
+      36 +            linkLabel="Start a session"                                                                                                                                                        
+      37 +            color="sand"                                                                                                                                                                       
+      38 +          />                                                                                                                                                                                   
+      39 +          <NHSCard                                                                                                                                                                             
+      40 +            icon="📚"                                                                                                                                                                          
+      41 +            title="Resources"                                                                                                                                                                  
+      42 +            description="Browse CBT manuals, psychoeducation guides, and printable activity worksheets."                                                                                       
+      43 +            linkTo="/resources"                                                                                                                                                                
+      44 +            linkLabel="Browse resources"                                                                                                                                                       
+      45 +            color="navy"                                                                                                                                                                       
+      46 +          />                                                                                                                                                                                   
+      47 +        </div>                                                                                                                                                                                 
+      48 +      </section>                                                                                                                                                                               
+      49 +                                                                                                                                                                                               
+      50 +      <section>                                                                                                                                                                                
+      51 +        <SectionDivider label="Training" />                                                                                                                                                    
+      52 +        <div className="grid gap-md sm:grid-cols-2">                                                                                                                                           
+      53 +          <NHSCard                                                                                                                                                                             
+      54 +            icon="🎓"                                                                                                                                                                          
+      55 +            title="Assignments & Top Tips"                                                                                                                                                     
+      56 +            description="Track your training assignments, review key clinical reminders, and access session scripts."                                                                          
+      57 +            linkTo="/training"                                                                                                                                                                 
+      58 +            linkLabel="View training"                                                                                                                                                          
+      59 +            color="blue"                                                                                                                                                                       
+      60 +          />                                                                                                                                                                                   
+      61 +          <NHSCard                                                                                                                                                                             
+      62 +            icon="💛"                                                                                                                                                                          
+      63 +            title="Help and Support"                                                                                                                                                           
+      64 +            description="Guidance on using CBT Companion safely and effectively in your clinical practice."                                                                                    
+      65 +            linkTo="/support"                                                                                                                                                                  
+      66 +            linkLabel="Get support"                                                                                                                                                            
+      67 +            color="lavender"                                                                                                                                                                   
+      68 +          />                                                                                                                                                                                   
+      69 +        </div>                                                                                                                                                                                 
+      70 +      </section>                                                                                                                                                                               
+      71      </div>
+      72    );
+      73  }
+
+⏺ Write(src/pages/home/ParentCarerDashboard.tsx)
+  ⎿  Added 49 lines, removed 35 lines
+       5    user: AuthUser;
+       6  }
+       7  
+       8 +function SectionDivider({ label }: { label: string }) {                                                                                                                                        
+       9 +  return (                                                                                                                                                                                     
+      10 +    <div className="mb-md flex items-center gap-md">                                                                                                                                           
+      11 +      <p className="whitespace-nowrap text-caption font-semibold uppercase tracking-widest text-muted-foreground">                                                                             
+      12 +        {label}                                                                                                                                                                                
+      13 +      </p>                                                                                                                                                                                     
+      14 +      <div className="h-px flex-1 rounded-full bg-border" />                                                                                                                                   
+      15 +    </div>                                                                                                                                                                                     
+      16 +  );                                                                                                                                                                                           
+      17 +}                                                                                                                                                                                              
+      18 +                                                                                                                                                                                               
+      19  export function ParentCarerDashboard({ user }: Props) {
+      20    return (
+      10 -    <div className="space-y-lg">                                                                                                                                                               
+      21 +    <div className="space-y-xl">                                                                                                                                                               
+      22        <NHSWelcomeBanner
+      23          username={user.username}
+      24          roleLabel="Parent and carer space"
+      25          message="Welcome to CBT Companion — your centralised space to understand the work you're doing and access resources shared by your practitioner."
+      26        />
+      27  
+      17 -      <div className="grid gap-md sm:grid-cols-2">                                                                                                                                             
+      18 -        <NHSCard                                                                                                                                                                               
+      19 -          icon="📚"                                                                                                                                                                            
+      20 -          title="Resources"                                                                                                                                                                    
+      21 -          description="Access psychoeducation guides, CBT explanations, and printable worksheets relevant to your young person's programme."                                                   
+      22 -          linkTo="/resources"                                                                                                                                                                  
+      23 -          linkLabel="Browse resources"                                                                                                                                                         
+      24 -          color="navy"                                                                                                                                                                         
+      25 -        />                                                                                                                                                                                     
+      26 -        <NHSCard                                                                                                                                                                               
+      27 -          icon="📋"                                                                                                                                                                            
+      28 -          title="Mood Check-In"                                                                                                                                                                
+      29 -          description="Record how you or your young person has been feeling and track patterns over time."                                                                                     
+      30 -          linkTo="/check-in"                                                                                                                                                                   
+      31 -          linkLabel="Start check-in"                                                                                                                                                           
+      32 -          color="blue"                                                                                                                                                                         
+      33 -        />                                                                                                                                                                                     
+      34 -        <NHSCard                                                                                                                                                                               
+      35 -          icon="📊"                                                                                                                                                                            
+      36 -          title="Weekly Review"                                                                                                                                                                
+      37 -          description="See a summary of recent check-ins and activities to support conversations with your practitioner."                                                                      
+      38 -          linkTo="/review"                                                                                                                                                                     
+      39 -          linkLabel="View review"                                                                                                                                                              
+      40 -          color="lavender"                                                                                                                                                                     
+      41 -        />                                                                                                                                                                                     
+      42 -        <NHSCard                                                                                                                                                                               
+      43 -          icon="💛"                                                                                                                                                                            
+      44 -          title="Help and Support"                                                                                                                                                             
+      45 -          description="Guidance on supporting a young person through CBT, plus contacts for urgent help."                                                                                      
+      46 -          linkTo="/support"                                                                                                                                                                    
+      47 -          linkLabel="View support"                                                                                                                                                             
+      48 -          color="teal"                                                                                                                                                                         
+      49 -        />                                                                                                                                                                                     
+      50 -      </div>                                                                                                                                                                                   
+      28 +      <section>                                                                                                                                                                                
+      29 +        <SectionDivider label="Your tools" />                                                                                                                                                  
+      30 +        <div className="grid gap-md sm:grid-cols-2">                                                                                                                                           
+      31 +          <NHSCard                                                                                                                                                                             
+      32 +            icon="📚"                                                                                                                                                                          
+      33 +            title="Resources"                                                                                                                                                                  
+      34 +            description="Access psychoeducation guides, CBT explanations, and printable worksheets relevant to your young person's programme."                                                 
+      35 +            linkTo="/resources"                                                                                                                                                                
+      36 +            linkLabel="Browse resources"                                                                                                                                                       
+      37 +            color="navy"                                                                                                                                                                       
+      38 +          />                                                                                                                                                                                   
+      39 +          <NHSCard                                                                                                                                                                             
+      40 +            icon="📋"                                                                                                                                                                          
+      41 +            title="Mood Check-In"                                                                                                                                                              
+      42 +            description="Record how you or your young person has been feeling and track patterns over time."                                                                                   
+      43 +            linkTo="/check-in"                                                                                                                                                                 
+      44 +            linkLabel="Start check-in"                                                                                                                                                         
+      45 +            color="blue"                                                                                                                                                                       
+      46 +          />                                                                                                                                                                                   
+      47 +          <NHSCard                                                                                                                                                                             
+      48 +            icon="📊"                                                                                                                                                                          
+      49 +            title="Weekly Review"                                                                                                                                                              
+      50 +            description="See a summary of recent check-ins and activities to support conversations with your practitioner."                                                                    
+      51 +            linkTo="/review"                                                                                                                                                                   
+      52 +            linkLabel="View review"                                                                                                                                                            
+      53 +            color="lavender"                                                                                                                                                                   
+      54 +          />                                                                                                                                                                                   
+      55 +          <NHSCard                                                                                                                                                                             
+      56 +            icon="💛"                                                                                                                                                                          
+      57 +            title="Help and Support"                                                                                                                                                           
+      58 +            description="Guidance on supporting a young person through CBT, plus contacts for urgent help."                                                                                    
+      59 +            linkTo="/support"                                                                                                                                                                  
+      60 +            linkLabel="View support"                                                                                                                                                           
+      61 +            color="teal"                                                                                                                                                                       
+      62 +          />                                                                                                                                                                                   
+      63 +        </div>                                                                                                                                                                                 
+      64 +      </section>                                                                                                                                                                               
+      65      </div>
+      66    );
+      67  }
+
+⏺ All five improvements are implemented. Here's what changed across the app:
+
+  1. Hero check-in card — replaces the plain button. If not yet checked in: full-width NHS Blue gradient card with "How are you feeling today?", a subtitle, and a white pill button that slides right on hover.
+   If already checked in: a soft blue-tinted card with the mood and anxiety ratings shown large, and a "check in again" link.
+
+  2. Even card counts — Young person: 4 tools + 2 support (all symmetric). Admin: 2+2. Trainee: 2+2. Practitioner: 3 in a single row. Parent/carer: 4.
+
+  3. Section dividers — Every dashboard now has named sections with a labelled rule line ("Your tools", "Support", "Management", "Clinical tools", "Training"). Applied consistently across all 5 dashboards.
+
+  4. Stats strip — Appears between the banner and the hero card for the young person only (it's personal data). Shows check-ins this week, activities completed, and last recorded mood — all from the existing
+  useWeeklyReview hook, renders nothing while loading.
+
+  5. Taller, richer banner — More vertical padding (pt-xl pb-xxl), a second subtitle line under "CBT Companion", a larger top-right halo, a partially-visible decorative ring in the bottom-right corner, a
+  small accent dot, and a thicker/wider bottom accent line. The role label is now styled as a proper uppercase tracking label.
+
+✻ Cogitated for 4m 55s
+
+❯ ok now I want you to delete all the child and parent accounts I made please. From now on once you select that you are a parent or child you have to choose what care you are receiving and yout then only     
+receive resources for that specific manual. And then once you select it says on the homepage hi 'your username'and what treatment you are receiving- it could say something like 'you are receiving treatment   
+for *insert the treatment*'                                                                                                                                                                                     
+  ⎿  API Error: 500 terminated
+
+✻ Brewed for 2m 31s
+
+❯ is it working now?                                                                                                                                                                                            
+  ⎿  API Error: 500 {"type":"error","error":{"type":"api_error","message":"Internal server error"},"request_id":"req_011CZrhkH7xbeDnopTvKB6eQ"}
+
+❯ is it not working right now?                                                                                                                                                                                  
+  ⎿  API Error: 500 terminated
+
+❯ still not working?                                                                                                                                                                                            
+  ⎿  API Error: 500 {"type":"error","error":{"type":"api_error","message":"Internal server error"},"request_id":"req_011CZrhusJ2D7eE3QD4v7CCY"}
+
+✻ Brewed for 1m 29s
+
+❯ try now                                                                                                                                                                                                       
+  ⎿  API Error: 500 {"type":"error","error":{"type":"api_error","message":"Internal server error"},"request_id":"req_011CZrhutzTwV2duYpkdrhdd"}
+
+  3 tasks (2 done, 1 in progress, 0 open)
+  ✔ Build backend resources API
+  ✔ Build frontend resource library pages
+  ◼ Build admin content management pages
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ ple  
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  ⏵⏵ accept edits on (shift+tab to cycle)                       
+

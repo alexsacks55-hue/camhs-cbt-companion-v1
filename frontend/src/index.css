@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  CSS custom properties for shadcn/ui and the app design system.
+  Mapped to the palette in design-guidelines.md.
+
+  Background: #F7F8FA  → hsl(220, 20%, 98%)
+  Surface:    #FFFFFF  → hsl(0, 0%, 100%)
+  Text:       #1F2933  → hsl(210, 24%, 16%)
+  Subtle:     #4B5563  → hsl(220, 13%, 34%)
+  Calm blue:  #4F7CAC  → hsl(210, 38%, 49%)
+*/
+
+@layer base {
+  :root {
+    --background: 210 60% 94%;       /* soft NHS-tinted light blue */
+    --foreground: 214 40% 14%;       /* #152030 — rich near-black */
+
+    --card: 0 0% 100%;               /* #FFFFFF */
+    --card-foreground: 214 40% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 214 40% 14%;
+
+    --primary: 214 97% 27%;          /* NHS Blue #003087 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 214 30% 95%;
+    --secondary-foreground: 214 40% 14%;
+
+    --muted: 218 20% 93%;
+    --muted-foreground: 218 14% 40%;
+
+    --accent: 198 75% 57%;           /* NHS Light Blue #41B6E6 */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 55% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 218 20% 88%;
+    --input: 218 20% 88%;
+    --ring: 214 97% 27%;             /* NHS Blue for focus rings */
+
+    --radius: 0.75rem;               /* 12px — slightly more generous */
+
+    /* Shadow scale */
+    --shadow-xs: 0 1px 2px 0 rgba(0,48,135,0.06);
+    --shadow-card: 0 1px 3px 0 rgba(0,48,135,0.07), 0 4px 12px 0 rgba(0,48,135,0.05);
+    --shadow-card-hover: 0 6px 20px 0 rgba(0,48,135,0.13), 0 2px 6px 0 rgba(0,48,135,0.07);
+    --shadow-strong: 0 12px 32px 0 rgba(0,48,135,0.16), 0 4px 8px 0 rgba(0,48,135,0.08);
+  }
+
+  /* ── Dark mode token overrides ──────────────────────────────────────────── */
+  .dark {
+    --background: 220 20% 10%;        /* #151A22 — deep blue-grey */
+    --foreground: 210 18% 92%;        /* #E3E8F0 — soft white */
+
+    --card: 220 18% 14%;              /* #1D2330 — elevated surface */
+    --card-foreground: 210 18% 92%;
+
+    --popover: 220 18% 14%;
+    --popover-foreground: 210 18% 92%;
+
+    --primary: 210 90% 58%;           /* lighter NHS Blue for dark bg */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 15% 20%;
+    --secondary-foreground: 210 18% 92%;
+
+    --muted: 220 15% 20%;
+    --muted-foreground: 218 10% 58%;
+
+    --accent: 198 70% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 50% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 14% 24%;
+    --input: 220 14% 24%;
+    --ring: 210 90% 65%;
+
+    --shadow-xs:        0 1px 2px 0 rgba(0,0,0,0.3);
+    --shadow-card:      0 1px 4px 0 rgba(0,0,0,0.4), 0 4px 12px 0 rgba(0,0,0,0.25);
+    --shadow-card-hover:0 6px 20px 0 rgba(0,0,0,0.45), 0 2px 6px 0 rgba(0,0,0,0.3);
+    --shadow-strong:    0 12px 32px 0 rgba(0,0,0,0.55), 0 4px 8px 0 rgba(0,0,0,0.35);
+  }
+
+  /* Base typography — design-guidelines.md */
+  html {
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+
+  /* Focus visible — keyboard accessibility */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  /* Minimum touch target size — design-guidelines.md */
+  button,
+  [role="button"],
+  a {
+    min-height: 44px;
+  }
+
+  /* Readable heading scale from design-guidelines.md */
+  h1 { font-size: 32px; font-weight: 600; line-height: 1.3; }
+  h2 { font-size: 24px; font-weight: 600; line-height: 1.4; }
+  h3 { font-size: 20px; font-weight: 500; line-height: 1.4; }
+}
+
+@layer utilities {
+  /* Max readable width for content pages */
+  .content-width {
+    max-width: 700px;
+    margin-inline: auto;
+  }
+
+  /* Smooth page transition */
+  .page-enter {
+    animation: fade-in 200ms ease-out;
+  }
+
+  /* Bold section-title accent — left border + spacing */
+  .section-title {
+    @apply border-l-4 pl-md font-semibold text-foreground;
+    border-color: #41B6E6;
+  }
+
+  /* Card shadow utilities mapped to CSS variables */
+  .shadow-card       { box-shadow: var(--shadow-card); }
+  .shadow-card-hover { box-shadow: var(--shadow-card-hover); }
+  .shadow-strong     { box-shadow: var(--shadow-strong); }
+  .shadow-xs         { box-shadow: var(--shadow-xs); }
+}
+
+/* ── Print styles (Phase 9 — Structured Exports) ─────────────────────────────
+   Hides navigation and non-content chrome. Keeps the review content readable.
+   Activated by window.print() on the Review page and Resource Detail page.   */
+
+@media print {
+  /* Hide all nav and interactive chrome */
+  nav,
+  [data-nav],
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Reset background and ensure black text on white */
+  body,
+  main {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Remove shadows and borders that look odd on paper */
+  .rounded-xl,
+  .shadow-sm {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Ensure cards are bordered cleanly for print */
+  .bg-card {
+    background: white !important;
+    border: 1px solid #ccc !important;
+  }
+
+  /* Don't break cards across pages */
+  section,
+  article,
+  li {
+    break-inside: avoid;
+  }
+
+  /* Full-width content — no max-width constraint needed on paper */
+  .content-width,
+  .max-w-content {
+    max-width: 100% !important;
+  }
+
+  /* Show print-only elements */
+  .print\:block {
+    display: block !important;
+  }
+}
