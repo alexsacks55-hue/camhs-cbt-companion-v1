@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
-   "skipLibCheck": true,
-    "strict": false,
-   "noEmitOnError": false,
     "target": "ES2022",
     "module": "CommonJS",
     "lib": ["ES2022"],
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
+    "noEmitOnError": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
