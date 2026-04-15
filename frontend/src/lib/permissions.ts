@@ -120,11 +120,7 @@ export function visibleNavItems(
     {
       label: "Insights",
       path: "/service-insights",
-      roles: [
-        UserRole.Practitioner,
-        UserRole.TraineePractitioner,
-        UserRole.Admin,
-      ],
+      roles: [UserRole.Admin],
     },
     {
       label: "Training",
