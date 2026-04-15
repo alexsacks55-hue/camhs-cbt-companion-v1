@@ -22,16 +22,16 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    const isRefreshCall = originalRequest?.url?.includes("/auth/refresh");
 
     // Don't retry refresh calls or already-retried requests
-    const isRefreshCall = originalRequest?.url?.includes("/auth/refresh");
     if (isRefreshCall || originalRequest?._retried) {
       return Promise.reject(error);
     }
 
     if (error.response?.status === 401) {
-      // Try to silently refresh the token
       if (!isRefreshing) {
+        // No refresh in progress — start one
         isRefreshing = true;
         try {
           const res = await api.post<{ data: { access_token: string } }>(
@@ -39,26 +39,33 @@ api.interceptors.response.use(
           );
           const newToken = res.data.data.access_token;
           api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
+
+          // Resolve any queued requests that were waiting
           pendingRequests.forEach((cb) => cb(newToken));
           pendingRequests = [];
+          isRefreshing = false;
+
+          // Retry the original request with the new token
+          originalRequest._retried = true;
+          originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
+          return api(originalRequest);
         } catch {
-          // Refresh failed — session is truly expired, redirect to sign-in
+          // Refresh failed — truly expired, redirect to sign-in
           pendingRequests = [];
+          isRefreshing = false;
           window.location.href = "/auth/sign-in";
           return Promise.reject(error);
-        } finally {
-          isRefreshing = false;
         }
-      }
-
-      // Queue this request until refresh completes
-      return new Promise((resolve) => {
-        pendingRequests.push((token: string) => {
-          originalRequest._retried = true;
-          originalRequest.headers["Authorization"] = `Bearer ${token}`;
-          resolve(api(originalRequest));
+      } else {
+        // Refresh already in progress — queue this request
+        return new Promise((resolve) => {
+          pendingRequests.push((token: string) => {
+            originalRequest._retried = true;
+            originalRequest.headers["Authorization"] = `Bearer ${token}`;
+            resolve(api(originalRequest));
+          });
         });
-      });
+      }
     }
 
     return Promise.reject(error);
