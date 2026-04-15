@@ -86,12 +86,6 @@ export function visibleNavItems(
       roles: [UserRole.YoungPerson, UserRole.ParentCarer],
     },
     {
-      label: "Diary",
-      path: "/diary",
-      roles: [UserRole.YoungPerson],
-      manualRequired: "low_mood",
-    },
-    {
       label: "Review",
       path: "/review",
       roles: [UserRole.YoungPerson, UserRole.ParentCarer],

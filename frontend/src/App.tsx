@@ -37,8 +37,6 @@ import SupportPage from "@/pages/support/SupportPage";
 // Trainee practitioner — Training
 import TrainingPage from "@/pages/training/TrainingPage";
 
-// Behavioural Activation Diary
-import ActivityDiaryPage from "@/pages/diary/ActivityDiaryPage";
 
 // Auth & onboarding pages
 import SignInPage from "@/pages/auth/SignInPage";
@@ -179,14 +177,6 @@ export default function App() {
             element={
               <ProtectedRoute feature="training">
                 <TrainingPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={ROUTES.diary}
-            element={
-              <ProtectedRoute feature="diary" requiredManual="low_mood">
-                <ActivityDiaryPage />
               </ProtectedRoute>
             }
           />
