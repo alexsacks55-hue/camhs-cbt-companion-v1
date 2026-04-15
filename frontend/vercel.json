@@ -1,8 +1,13 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/:path*",
-      "destination": "https://camhs-backend.onrender.com/api/:path*"
+      "src": "/api/(.*)",
+      "dest": "https://camhs-backend.onrender.com/api/$1"
+    },
+    { "handle": "filesystem" },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
