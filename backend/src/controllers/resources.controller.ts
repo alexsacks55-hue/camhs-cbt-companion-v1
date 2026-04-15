@@ -135,7 +135,7 @@ export async function handleReorder(req: Request, res: Response): Promise<void> 
   }
 
   try {
-    await reorderResources(parsed.data.items);
+    await reorderResources(parsed.data.items as Array<{ id: string; sort_order: number }>);
     res.json({ data: { message: "Order updated." } });
   } catch (err) {
     logger.error("Reorder resources error", { error: err });

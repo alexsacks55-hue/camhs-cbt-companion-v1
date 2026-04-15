@@ -156,7 +156,7 @@ export async function createResource(input: CreateResourceInput, createdBy: stri
 
   return prisma.$transaction(async (tx) => {
     const resource = await tx.resource.create({
-      data: { ...fields, created_by: createdBy },
+      data: { ...fields, created_by: createdBy } as Prisma.ResourceUncheckedCreateInput,
     });
     await tx.resourceVisibility.createMany({
       data: visibility.map((role) => ({ resource_id: resource.id, role })),
