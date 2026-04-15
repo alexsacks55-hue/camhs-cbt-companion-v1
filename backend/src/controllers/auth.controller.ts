@@ -30,7 +30,7 @@ const REFRESH_COOKIE_NAME = "refresh_token";
 const REFRESH_COOKIE_OPTIONS = {
   httpOnly: true,
   secure: true,
-  sameSite: "lax" as const, // same-site via Vercel proxy
+  sameSite: "none" as const, // works cross-site and same-site
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in ms
   path: "/api/v1/auth",
 };
@@ -93,7 +93,7 @@ export async function handleRefresh(req: Request, res: Response): Promise<void> 
     res.status(200).json({ data: { access_token: accessToken } });
   } catch (err) {
     if (err instanceof UnauthorizedError) {
-      res.clearCookie(REFRESH_COOKIE_NAME, { path: "/api/v1/auth", sameSite: "lax", secure: true });
+      res.clearCookie(REFRESH_COOKIE_NAME, { path: "/api/v1/auth", sameSite: "none", secure: true });
       res.status(401).json({ message: err.message });
       return;
     }
@@ -111,7 +111,7 @@ export async function handleLogout(req: Request, res: Response): Promise<void> {
       logger.warn("Logout cleanup failed", { userId, error: err });
     }
   }
-  res.clearCookie(REFRESH_COOKIE_NAME, { path: "/api/v1/auth", sameSite: "lax", secure: true });
+  res.clearCookie(REFRESH_COOKIE_NAME, { path: "/api/v1/auth", sameSite: "none", secure: true });
   res.status(200).json({ data: { message: "Signed out successfully." } });
 }
 
