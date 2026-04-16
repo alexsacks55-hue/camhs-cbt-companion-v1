@@ -1,22 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
 import { useTheme } from "@/app/ThemeContext";
 import { Sun, Moon } from "lucide-react";
-import { ROUTES } from "@/config/routes";
 
 /**
  * Slim top bar — visible on md and up alongside the sidebar.
- * Contains only theme toggle and sign out. Branding + nav are in SideNav.
+ * Contains only the theme toggle. Sign out and change password are in SideNav.
  */
 export function TopNav() {
-  const { signOut } = useAuth();
   const { theme, toggle } = useTheme();
-  const navigate = useNavigate();
-
-  async function handleSignOut() {
-    await signOut();
-    navigate("/auth/sign-in", { replace: true });
-  }
 
   return (
     <header
@@ -30,7 +20,6 @@ export function TopNav() {
       >
         {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
       </button>
-
     </header>
   );
 }
