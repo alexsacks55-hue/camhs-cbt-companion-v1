@@ -5,11 +5,12 @@ import { AuthLayout } from "@/layouts/AuthLayout";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const TREATMENTS: Array<{
+const ALL_TREATMENTS: Array<{
   value: string;
   label: string;
   description: string;
   emoji: string;
+  youngPersonOnly?: false;
 }> = [
   {
     value: "anxiety",
@@ -29,12 +30,6 @@ const TREATMENTS: Array<{
     description: "CBT support for managing difficult behaviours and patterns.",
     emoji: "🧩",
   },
-  {
-    value: "sleep",
-    label: "Sleep",
-    description: "CBT support for improving sleep patterns and routines.",
-    emoji: "🌙",
-  },
 ];
 
 export default function TreatmentSelectionPage() {
@@ -46,6 +41,11 @@ export default function TreatmentSelectionPage() {
     navigate("/onboarding/role");
     return null;
   }
+
+  // Young people (18 and under) cannot select Behavioural Challenges
+  const treatments = state.role === UserRole.YoungPerson
+    ? ALL_TREATMENTS.filter((t) => t.value !== "behavioural_challenges")
+    : ALL_TREATMENTS;
 
   function handleSelect(treatment: string) {
     setManualType(treatment);
@@ -63,7 +63,7 @@ export default function TreatmentSelectionPage() {
       </header>
 
       <ul className="flex flex-col gap-sm" role="list">
-        {TREATMENTS.map((treatment) => (
+        {treatments.map((treatment) => (
           <li key={treatment.value}>
             <button
               onClick={() => handleSelect(treatment.value)}
