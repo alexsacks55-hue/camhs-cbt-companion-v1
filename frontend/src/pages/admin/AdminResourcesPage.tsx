@@ -28,13 +28,13 @@ const CATEGORY_LABELS: Record<ResourceCategory, string> = {
 
 export default function AdminResourcesPage() {
   const navigate = useNavigate();
-  const [filterStatus, setFilterStatus] = useState<string>("");
-  const [filterCategory, setFilterCategory] = useState<string>("");
+  const [filterStatus, setFilterStatus] = useState<string>("all");
+  const [filterCategory, setFilterCategory] = useState<string>("all");
   const [deleting, setDeleting] = useState<string | null>(null);
 
   const { data: resources, status, reload } = useAdminResourceList({
-    status: filterStatus || undefined,
-    category: filterCategory || undefined,
+    status: filterStatus === "all" ? undefined : filterStatus,
+    category: filterCategory === "all" ? undefined : filterCategory,
   });
 
   async function handleDelete(id: string, title: string) {
@@ -80,7 +80,7 @@ export default function AdminResourcesPage() {
             <SelectValue placeholder="All statuses" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All statuses</SelectItem>
+            <SelectItem value="all">All statuses</SelectItem>
             {Object.values(ResourceStatus).map((s) => (
               <SelectItem key={s} value={s}>{STATUS_BADGE[s].label}</SelectItem>
             ))}
@@ -92,7 +92,7 @@ export default function AdminResourcesPage() {
             <SelectValue placeholder="All categories" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All categories</SelectItem>
+            <SelectItem value="all">All categories</SelectItem>
             {Object.values(ResourceCategory).map((c) => (
               <SelectItem key={c} value={c}>{CATEGORY_LABELS[c]}</SelectItem>
             ))}
