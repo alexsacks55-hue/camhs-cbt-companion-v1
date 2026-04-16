@@ -20,12 +20,8 @@ function addDays(dateStr: string, n: number): string {
 }
 
 function formatDateLabel(dateStr: string): string {
-  const today = todayStr();
-  const yesterday = addDays(today, -1);
-  if (dateStr === today) return "Today";
-  if (dateStr === yesterday) return "Yesterday";
   const d = new Date(`${dateStr}T00:00:00`);
-  return d.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
+  return d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
 }
 
 /** Calculate hours between a bedtime and wake time, handling overnight. */
@@ -44,41 +40,36 @@ function calcHours(bedtime: string, wakeTime: string): string {
 
 export default function SleepDiaryPage() {
   const navigate = useNavigate();
-  const { entries, status, save } = useSleepDiary(60);
+  const today = todayStr();
+  const { entries, status, save } = useSleepDiary(14);
 
-  const [selectedDate, setSelectedDate] = useState(todayStr());
   const [bedtime, setBedtime] = useState("");
   const [wakeTime, setWakeTime] = useState("");
   const [quality, setQuality] = useState<number | null>(null);
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
-  // Populate form when date or entries change
+  // Populate form from today's entry if it exists
   useEffect(() => {
-    const entry = entries.find((e) => e.entry_date === selectedDate);
+    if (status !== "success") return;
+    const entry = entries.find((e) => e.entry_date === today);
     if (entry) {
       setBedtime(entry.bedtime);
       setWakeTime(entry.wake_time);
       setQuality(entry.sleep_quality);
-    } else {
-      setBedtime("");
-      setWakeTime("");
-      setQuality(null);
     }
-    setSaveStatus("idle");
-  }, [selectedDate, entries]);
+  }, [status]);
 
   async function handleSave() {
     if (!bedtime || !wakeTime || quality === null) return;
     setSaveStatus("saving");
     try {
-      await save({ entry_date: selectedDate, bedtime, wake_time: wakeTime, sleep_quality: quality });
+      await save({ entry_date: today, bedtime, wake_time: wakeTime, sleep_quality: quality });
       setSaveStatus("saved");
     } catch {
       setSaveStatus("error");
     }
   }
 
-  const canGoForward = selectedDate < todayStr();
   const hoursSlept = calcHours(bedtime, wakeTime);
   const canSave = !!bedtime && !!wakeTime && quality !== null;
 
@@ -112,34 +103,11 @@ export default function SleepDiaryPage() {
       {status === "success" && (
         <div className="space-y-xl max-w-content">
 
-          {/* Date navigation */}
-          <div className="flex items-center gap-md">
-            <button
-              onClick={() => setSelectedDate((d) => addDays(d, -1))}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:bg-muted"
-              aria-label="Previous day"
-            >
-              ‹
-            </button>
-            <span className="flex-1 text-center text-body font-semibold text-foreground">
-              {formatDateLabel(selectedDate)}
-            </span>
-            <button
-              onClick={() => setSelectedDate((d) => addDays(d, 1))}
-              disabled={!canGoForward}
-              className={cn(
-                "flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors",
-                canGoForward ? "hover:bg-muted" : "opacity-30 cursor-not-allowed",
-              )}
-              aria-label="Next day"
-            >
-              ›
-            </button>
-          </div>
+          {/* Tonight's entry */}
+          <section className="rounded-xl border border-border bg-card p-lg space-y-md">
+            <h2 className="text-h3 text-foreground">Tonight's entry</h2>
 
-          {/* Bedtime + Wake time */}
-          <section className="space-y-md">
-            <h2 className="text-h3 text-foreground">When did you sleep?</h2>
+            {/* Bedtime + Wake time */}
             <div className="grid grid-cols-2 gap-md">
               <div className="space-y-xs">
                 <label htmlFor="bedtime" className="text-caption font-medium text-foreground">
@@ -150,7 +118,7 @@ export default function SleepDiaryPage() {
                   type="time"
                   value={bedtime}
                   onChange={(e) => { setBedtime(e.target.value); setSaveStatus("idle"); }}
-                  className="w-full rounded-lg border border-border bg-card px-md py-sm text-body text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="w-full rounded-lg border border-border bg-background px-md py-sm text-body text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 />
               </div>
               <div className="space-y-xs">
@@ -162,7 +130,7 @@ export default function SleepDiaryPage() {
                   type="time"
                   value={wakeTime}
                   onChange={(e) => { setWakeTime(e.target.value); setSaveStatus("idle"); }}
-                  className="w-full rounded-lg border border-border bg-card px-md py-sm text-body text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="w-full rounded-lg border border-border bg-background px-md py-sm text-body text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 />
               </div>
             </div>
@@ -171,56 +139,54 @@ export default function SleepDiaryPage() {
                 Calculated: <span className="font-semibold text-foreground">{hoursSlept}</span> of sleep
               </p>
             )}
-          </section>
 
-          {/* Sleep quality */}
-          <section aria-label="Sleep quality">
-            <h2 className="text-h3 text-foreground mb-sm">How was your sleep quality?</h2>
-            <p className="text-caption text-muted-foreground mb-md">1 = very poor, 10 = excellent</p>
-            <div className="flex gap-xs flex-wrap">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-                <button
-                  key={n}
-                  onClick={() => { setQuality(n); setSaveStatus("idle"); }}
-                  className={cn(
-                    "h-10 w-10 rounded-lg border text-caption font-semibold transition-colors",
-                    quality === n
-                      ? "border-[#003087] bg-[#003087] text-white"
-                      : "border-border bg-card text-foreground hover:border-[#003087] hover:text-[#003087]",
-                  )}
-                  aria-label={`Sleep quality ${n}`}
-                  aria-pressed={quality === n}
-                >
-                  {n}
-                </button>
-              ))}
+            {/* Sleep quality */}
+            <div>
+              <p className="text-caption font-medium text-foreground mb-xs">Sleep quality</p>
+              <p className="text-caption text-muted-foreground mb-sm">1 = very poor, 10 = excellent</p>
+              <div className="flex gap-xs flex-wrap">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+                  <button
+                    key={n}
+                    onClick={() => { setQuality(n); setSaveStatus("idle"); }}
+                    className={cn(
+                      "h-10 w-10 rounded-lg border text-caption font-semibold transition-colors",
+                      quality === n
+                        ? "border-[#003087] bg-[#003087] text-white"
+                        : "border-border bg-background text-foreground hover:border-[#003087] hover:text-[#003087]",
+                    )}
+                    aria-label={`Sleep quality ${n}`}
+                    aria-pressed={quality === n}
+                  >
+                    {n}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Save */}
+            <div className="flex items-center gap-md pt-xs">
+              <Button
+                onClick={handleSave}
+                disabled={!canSave || saveStatus === "saving"}
+                style={{ backgroundColor: "#003087" }}
+                className="text-white font-semibold"
+              >
+                {saveStatus === "saving" ? "Saving…" : "Save entry"}
+              </Button>
+              {saveStatus === "saved" && (
+                <span className="text-caption text-green-700 font-medium">Saved ✓</span>
+              )}
+              {saveStatus === "error" && (
+                <span className="text-caption text-destructive font-medium">Couldn't save — please try again.</span>
+              )}
+              {!canSave && saveStatus === "idle" && (
+                <span className="text-caption text-muted-foreground">Fill in all fields to save</span>
+              )}
             </div>
           </section>
 
-          {/* Save */}
-          <div className="flex items-center gap-md">
-            <Button
-              onClick={handleSave}
-              disabled={!canSave || saveStatus === "saving"}
-              style={{ backgroundColor: "#003087" }}
-              className="text-white font-semibold"
-            >
-              {saveStatus === "saving" ? "Saving…" : "Save entry"}
-            </Button>
-            {saveStatus === "saved" && (
-              <span className="text-caption text-green-700 font-medium">Saved ✓</span>
-            )}
-            {saveStatus === "error" && (
-              <span className="text-caption text-destructive font-medium">Couldn't save — please try again.</span>
-            )}
-            {!canSave && saveStatus === "idle" && (
-              <span className="text-caption text-muted-foreground">
-                Fill in all fields to save
-              </span>
-            )}
-          </div>
-
-          {/* Chart */}
+          {/* 7-day history */}
           <SleepChart entries={entries} />
         </div>
       )}
@@ -230,14 +196,17 @@ export default function SleepDiaryPage() {
 
 // ── Sleep quality chart ───────────────────────────────────────────────────────
 
-function SleepChart({ entries }: { entries: { entry_date: string; sleep_quality: number }[] }) {
-  const days = 14;
+function SleepChart({ entries }: { entries: { entry_date: string; sleep_quality: number; bedtime: string; wake_time: string }[] }) {
   const today = todayStr();
-  const window: Array<{ date: string; quality: number | null }> = [];
-  for (let i = days - 1; i >= 0; i--) {
+  const window: Array<{ date: string; quality: number | null; hours: string | null }> = [];
+  for (let i = 6; i >= 0; i--) {
     const d = addDays(today, -i);
     const entry = entries.find((e) => e.entry_date === d);
-    window.push({ date: d, quality: entry?.sleep_quality ?? null });
+    window.push({
+      date: d,
+      quality: entry?.sleep_quality ?? null,
+      hours: entry ? calcHours(entry.bedtime, entry.wake_time) : null,
+    });
   }
 
   const hasAny = window.some((d) => d.quality !== null);
@@ -246,8 +215,8 @@ function SleepChart({ entries }: { entries: { entry_date: string; sleep_quality:
   const chartHeight = 80;
 
   return (
-    <section aria-label="Sleep quality over time">
-      <h2 className="text-h3 text-foreground mb-md">Your sleep quality over time</h2>
+    <section aria-label="Sleep quality over the past 7 days">
+      <h2 className="text-h3 text-foreground mb-md">Last 7 days</h2>
       <div className="rounded-xl border border-border bg-card p-lg">
         <div className="flex items-end gap-xs" style={{ height: `${chartHeight}px` }}>
           {window.map(({ date, quality }) => (
@@ -262,7 +231,7 @@ function SleepChart({ entries }: { entries: { entry_date: string; sleep_quality:
                   style={{
                     height: `${(quality / 10) * chartHeight}px`,
                     backgroundColor: "#41B6E6",
-                    opacity: 0.8,
+                    opacity: 0.85,
                     minHeight: "4px",
                   }}
                   title={`${formatDateLabel(date)}: ${quality}/10`}
@@ -274,11 +243,21 @@ function SleepChart({ entries }: { entries: { entry_date: string; sleep_quality:
             </div>
           ))}
         </div>
-        <div className="flex justify-between mt-sm">
-          <span className="text-[10px] text-muted-foreground">
-            {new Date(`${window[0].date}T00:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
-          </span>
-          <span className="text-[10px] text-muted-foreground text-right">Today</span>
+        {/* Day labels */}
+        <div className="flex mt-sm gap-xs">
+          {window.map(({ date, quality, hours }) => (
+            <div key={date} className="flex flex-1 flex-col items-center gap-xs">
+              <span className="text-[9px] text-muted-foreground text-center leading-tight">
+                {formatDateLabel(date)}
+              </span>
+              {quality !== null && (
+                <span className="text-[9px] font-semibold text-foreground">{quality}/10</span>
+              )}
+              {hours && (
+                <span className="text-[9px] text-muted-foreground">{hours}</span>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>
