@@ -6,7 +6,7 @@
     "dev": "tsx watch src/index.ts",
     "build": "prisma generate && tsc",
     "start": "node dist/index.js",
-    "start:prod": "prisma migrate deploy && node dist/index.js",
+    "start:prod": "prisma migrate resolve --rolled-back 0005_add_wind_down_logs || true && prisma migrate deploy && node dist/index.js",
     "typecheck": "tsc --noEmit",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
