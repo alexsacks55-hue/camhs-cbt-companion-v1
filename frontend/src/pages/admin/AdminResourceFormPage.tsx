@@ -279,10 +279,10 @@ export default function AdminResourceFormPage() {
               name="journey_step"
               control={control}
               render={({ field }) => (
-                <Select value={field.value ?? ""} onValueChange={(v) => field.onChange(v || null)}>
+                <Select value={field.value ?? "none"} onValueChange={(v) => field.onChange(v === "none" ? null : v)}>
                   <SelectTrigger><SelectValue placeholder="None" /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">None</SelectItem>
+                    <SelectItem value="none">None</SelectItem>
                     <SelectItem value={JourneyStep.Understand}>Understand</SelectItem>
                     <SelectItem value={JourneyStep.TryIt}>Try it</SelectItem>
                     <SelectItem value={JourneyStep.Practise}>Practise</SelectItem>
@@ -341,10 +341,10 @@ export default function AdminResourceFormPage() {
               name="video_placement"
               control={control}
               render={({ field }) => (
-                <Select value={field.value ?? ""} onValueChange={(v) => field.onChange(v || null)}>
+                <Select value={field.value ?? "none"} onValueChange={(v) => field.onChange(v === "none" ? null : v)}>
                   <SelectTrigger><SelectValue placeholder="Select placement" /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">No video</SelectItem>
+                    <SelectItem value="none">No video</SelectItem>
                     <SelectItem value="top">Top — before session text</SelectItem>
                     <SelectItem value="below">Below — after session text</SelectItem>
                   </SelectContent>
