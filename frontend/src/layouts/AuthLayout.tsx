@@ -28,7 +28,7 @@ export function AuthLayout({
             NHS
           </span>
           <div>
-            <p className="text-body font-bold leading-tight text-white">CBT Companion</p>
+            <p className="text-body font-bold leading-tight text-white">CWP Companion</p>
             <p className="text-caption leading-tight" style={{ color: "rgba(255,255,255,0.65)" }}>
               CAMHS digital support tool
             </p>

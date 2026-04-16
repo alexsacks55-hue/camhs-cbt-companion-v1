@@ -62,7 +62,7 @@ export function SideNav() {
           NHS
         </span>
         <span className="text-body font-bold tracking-tight text-white leading-tight">
-          CBT Companion
+          CWP Companion
         </span>
       </div>
 
