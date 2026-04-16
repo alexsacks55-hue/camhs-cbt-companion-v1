@@ -263,6 +263,16 @@ export interface DBWindDownRoutine {
   updated_at: Date;
 }
 
+export interface DBWindDownLog {
+  id: string;
+  user_id: string;
+  /** Calendar date as "YYYY-MM-DD". */
+  log_date: string;
+  /** True if the user confirmed they completed their routine that night. */
+  completed: boolean;
+  created_at: Date;
+}
+
 // ─── Analytics Events (analytics schema) ─────────────────────────────────────
 
 export interface DBAnalyticsEvent {

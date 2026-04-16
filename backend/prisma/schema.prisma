@@ -141,6 +141,7 @@ model User {
   activity_diary_entries ActivityDiaryEntry[]
   sleep_diary_entries    SleepDiaryEntry[]
   wind_down_routine      WindDownRoutine?
+  wind_down_logs         WindDownLog[]
 
   @@map("users")
   @@schema("core")
@@ -369,6 +370,25 @@ model WindDownRoutine {
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("wind_down_routines")
+  @@schema("core")
+}
+
+/// Daily record of whether the user completed their wind-down routine.
+/// One row per user per calendar date.
+model WindDownLog {
+  id         String   @id @default(uuid())
+  user_id    String
+  /// Calendar date stored as "YYYY-MM-DD".
+  log_date   String
+  /// True if the user confirmed they completed their routine that night.
+  completed  Boolean  @default(true)
+  created_at DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, log_date])
+  @@index([user_id, log_date])
+  @@map("wind_down_logs")
   @@schema("core")
 }
 

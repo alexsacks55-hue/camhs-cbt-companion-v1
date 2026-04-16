@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { sleepApi } from "@/services/sleep.service";
-import type { DBSleepDiaryEntry, DBWindDownRoutine } from "shared/types/database";
+import type { DBSleepDiaryEntry, DBWindDownRoutine, DBWindDownLog } from "shared/types/database";
 
 type Status = "loading" | "success" | "error";
 
@@ -55,4 +55,32 @@ export function useWindDown() {
   }
 
   return { routine, status, save };
+}
+
+// ── Wind-down logs ─────────────────────────────────────────────────────────────
+
+export function useWindDownLogs(days = 14) {
+  const [logs, setLogs] = useState<DBWindDownLog[]>([]);
+  const [status, setStatus] = useState<Status>("loading");
+
+  useEffect(() => {
+    let cancelled = false;
+    setStatus("loading");
+    sleepApi
+      .listWindDownLogs(days)
+      .then((d) => { if (!cancelled) { setLogs(d); setStatus("success"); } })
+      .catch(() => { if (!cancelled) setStatus("error"); });
+    return () => { cancelled = true; };
+  }, [days]);
+
+  async function logCompletion(logDate: string, completed: boolean) {
+    const log = await sleepApi.upsertWindDownLog({ log_date: logDate, completed });
+    setLogs((prev) => {
+      const others = prev.filter((l) => l.log_date !== log.log_date);
+      return [log, ...others].sort((a, b) => b.log_date.localeCompare(a.log_date));
+    });
+    return log;
+  }
+
+  return { logs, status, logCompletion };
 }

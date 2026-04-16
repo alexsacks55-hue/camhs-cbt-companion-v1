@@ -88,3 +88,33 @@ export async function upsertWindDown(userId: string, input: UpsertWindDownInput)
     update: { target_bedtime: input.target_bedtime ?? null, activities: input.activities },
   });
 }
+
+// ── Wind-down logs ─────────────────────────────────────────────────────────────
+
+export const UpsertWindDownLogSchema = z.object({
+  log_date:  z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "log_date must be YYYY-MM-DD"),
+  completed: z.boolean(),
+});
+
+export type UpsertWindDownLogInput = z.infer<typeof UpsertWindDownLogSchema>;
+
+/** Return daily completion logs for the past `days` calendar days, newest first. */
+export async function listWindDownLogs(userId: string, days = 14) {
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - days);
+  const cutoffStr = cutoff.toISOString().slice(0, 10);
+
+  return prisma.windDownLog.findMany({
+    where: { user_id: userId, log_date: { gte: cutoffStr } },
+    orderBy: { log_date: "desc" },
+  });
+}
+
+/** Record or update whether the user completed their routine on a given date. */
+export async function upsertWindDownLog(userId: string, input: UpsertWindDownLogInput) {
+  return prisma.windDownLog.upsert({
+    where:  { user_id_log_date: { user_id: userId, log_date: input.log_date } },
+    create: { user_id: userId, log_date: input.log_date, completed: input.completed },
+    update: { completed: input.completed },
+  });
+}

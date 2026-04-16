@@ -4,6 +4,7 @@ import { requireAuth } from "../middleware/auth";
 import {
   handleListSleepDiary, handleUpsertSleepDiary,
   handleGetWindDown,    handleUpsertWindDown,
+  handleListWindDownLogs, handleUpsertWindDownLog,
 } from "../controllers/sleep.controller";
 
 const router = Router();
@@ -17,5 +18,9 @@ router.post("/diary", handleUpsertSleepDiary);
 // Wind-down routine
 router.get("/wind-down",  handleGetWindDown);
 router.post("/wind-down", handleUpsertWindDown);
+
+// Wind-down daily completion logs
+router.get("/wind-down/logs",  handleListWindDownLogs);
+router.post("/wind-down/logs", handleUpsertWindDownLog);
 
 export default router;

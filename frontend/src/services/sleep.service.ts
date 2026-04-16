@@ -1,5 +1,5 @@
 import { api } from "./api";
-import type { DBSleepDiaryEntry, DBWindDownRoutine } from "shared/types/database";
+import type { DBSleepDiaryEntry, DBWindDownRoutine, DBWindDownLog } from "shared/types/database";
 
 export interface UpsertSleepDiaryPayload {
   entry_date: string;
@@ -35,6 +35,19 @@ export const sleepApi = {
 
   async upsertWindDown(payload: UpsertWindDownPayload): Promise<DBWindDownRoutine> {
     const res = await api.post<{ data: DBWindDownRoutine }>("/v1/sleep/wind-down", payload);
+    return res.data.data;
+  },
+
+  // ── Wind-down logs ───────────────────────────────────────────────────────────
+  async listWindDownLogs(days = 14): Promise<DBWindDownLog[]> {
+    const res = await api.get<{ data: DBWindDownLog[] }>("/v1/sleep/wind-down/logs", {
+      params: { days },
+    });
+    return res.data.data;
+  },
+
+  async upsertWindDownLog(payload: { log_date: string; completed: boolean }): Promise<DBWindDownLog> {
+    const res = await api.post<{ data: DBWindDownLog }>("/v1/sleep/wind-down/logs", payload);
     return res.data.data;
   },
 };

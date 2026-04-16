@@ -4,8 +4,25 @@ import { AppLayout } from "@/layouts/AppLayout";
 import { Button } from "@/components/ui/button";
 import { LoadingState } from "@/components/ui/loading-state";
 import { ErrorState } from "@/components/ui/error-state";
-import { useWindDown } from "@/hooks/useSleep";
+import { useWindDown, useWindDownLogs } from "@/hooks/useSleep";
 import { cn } from "@/lib/utils";
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+function todayStr() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function addDays(dateStr: string, n: number): string {
+  const d = new Date(`${dateStr}T00:00:00`);
+  d.setDate(d.getDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
+function formatDayLabel(dateStr: string): string {
+  const d = new Date(`${dateStr}T00:00:00`);
+  return d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+}
 
 const PRESET_ACTIVITIES = [
   "No screens 1 hour before bed",
@@ -24,11 +41,16 @@ const PRESET_ACTIVITIES = [
 
 export default function WindDownPage() {
   const navigate = useNavigate();
+  const today = todayStr();
   const { routine, status, save } = useWindDown();
+  const { logs, status: logsStatus, logCompletion } = useWindDownLogs(14);
 
   const [selectedActivities, setSelectedActivities] = useState<Set<string>>(new Set());
   const [targetBedtime, setTargetBedtime] = useState("");
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [logStatus, setLogStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+
+  const todayLog = logs.find((l) => l.log_date === today);
 
   // Populate form when routine loads
   useEffect(() => {
@@ -58,6 +80,16 @@ export default function WindDownPage() {
       setSaveStatus("saved");
     } catch {
       setSaveStatus("error");
+    }
+  }
+
+  async function handleLog(completed: boolean) {
+    setLogStatus("saving");
+    try {
+      await logCompletion(today, completed);
+      setLogStatus("saved");
+    } catch {
+      setLogStatus("error");
     }
   }
 
@@ -196,9 +228,108 @@ export default function WindDownPage() {
               <span className="text-caption text-destructive font-medium">Couldn't save — please try again.</span>
             )}
           </div>
+
+          {/* Tonight's check-in */}
+          {selectedActivities.size > 0 && (
+            <section className="rounded-xl border border-border bg-card p-lg space-y-md">
+              <h2 className="text-h3 text-foreground">Did you follow your routine tonight?</h2>
+              <p className="text-caption text-muted-foreground">
+                Log whether you completed your wind-down routine to track your progress.
+              </p>
+              <div className="flex gap-md">
+                <button
+                  onClick={() => handleLog(true)}
+                  disabled={logStatus === "saving"}
+                  className={cn(
+                    "flex-1 rounded-xl border-2 py-sm text-caption font-semibold transition-colors",
+                    todayLog?.completed === true
+                      ? "border-[#003087] bg-[#003087] text-white"
+                      : "border-border bg-background text-foreground hover:border-[#003087] hover:text-[#003087]",
+                  )}
+                >
+                  Yes ✓
+                </button>
+                <button
+                  onClick={() => handleLog(false)}
+                  disabled={logStatus === "saving"}
+                  className={cn(
+                    "flex-1 rounded-xl border-2 py-sm text-caption font-semibold transition-colors",
+                    todayLog?.completed === false
+                      ? "border-destructive bg-destructive/10 text-destructive"
+                      : "border-border bg-background text-foreground hover:border-muted-foreground",
+                  )}
+                >
+                  Not tonight
+                </button>
+              </div>
+              {logStatus === "error" && (
+                <p className="text-caption text-destructive">Couldn't save — please try again.</p>
+              )}
+            </section>
+          )}
+
+          {/* 7-day history */}
+          {logsStatus === "success" && <WindDownHistory logs={logs} />}
         </div>
       )}
     </AppLayout>
+  );
+}
+
+// ── 7-day history chart ───────────────────────────────────────────────────────
+
+function WindDownHistory({ logs }: { logs: { log_date: string; completed: boolean }[] }) {
+  const today = todayStr();
+  const window: Array<{ date: string; completed: boolean | null }> = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = addDays(today, -i);
+    const log = logs.find((l) => l.log_date === d);
+    window.push({ date: d, completed: log ? log.completed : null });
+  }
+
+  const hasAny = window.some((d) => d.completed !== null);
+  if (!hasAny) return null;
+
+  return (
+    <section aria-label="Wind-down routine history">
+      <h2 className="text-h3 text-foreground mb-md">Last 7 days</h2>
+      <div className="rounded-xl border border-border bg-card p-lg">
+        <div className="flex gap-xs">
+          {window.map(({ date, completed }) => (
+            <div key={date} className="flex flex-1 flex-col items-center gap-xs">
+              <div
+                className={cn(
+                  "w-full rounded-lg flex items-center justify-center text-sm font-bold",
+                  completed === true  && "bg-[#003087] text-white",
+                  completed === false && "bg-muted text-muted-foreground",
+                  completed === null  && "bg-muted/40 text-muted-foreground/40",
+                )}
+                style={{ height: "40px" }}
+                aria-label={
+                  completed === true  ? `Completed on ${formatDayLabel(date)}` :
+                  completed === false ? `Not completed on ${formatDayLabel(date)}` :
+                  `No entry for ${formatDayLabel(date)}`
+                }
+              >
+                {completed === true && "✓"}
+                {completed === false && "–"}
+              </div>
+              <span className="text-[9px] text-muted-foreground text-center leading-tight">
+                {formatDayLabel(date)}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="flex items-center gap-md mt-md">
+          <span className="flex items-center gap-xs text-[10px] text-muted-foreground">
+            <span className="inline-block h-3 w-3 rounded bg-[#003087]" /> Completed
+          </span>
+          <span className="flex items-center gap-xs text-[10px] text-muted-foreground">
+            <span className="inline-block h-3 w-3 rounded bg-muted" /> Not completed
+          </span>
+        </div>
+      </div>
+    </section>
   );
 }
 
