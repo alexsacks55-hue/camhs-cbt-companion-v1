@@ -1,6 +1,7 @@
 import type React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { usePermissions } from "@/hooks/usePermissions";
+import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 import {
   Home,
@@ -13,7 +14,10 @@ import {
   Shield,
   TrendingUp,
   NotebookPen,
+  KeyRound,
+  LogOut,
 } from "lucide-react";
+import { ROUTES } from "@/config/routes";
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>> = {
   "/home":              Home,
@@ -34,6 +38,13 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string; "aria-h
  */
 export function SideNav() {
   const { navItems } = usePermissions();
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleSignOut() {
+    await signOut();
+    navigate("/auth/sign-in", { replace: true });
+  }
 
   return (
     <aside
@@ -59,7 +70,7 @@ export function SideNav() {
       <div className="mx-lg mb-md h-px" style={{ backgroundColor: "#41B6E6", opacity: 0.4 }} aria-hidden="true" />
 
       {/* Nav links */}
-      <nav aria-label="Main navigation" className="flex-1 overflow-y-auto px-sm pb-md">
+      <nav aria-label="Main navigation" className="flex-1 overflow-y-auto px-sm">
         <ul className="space-y-0.5">
           {navItems.map((item) => {
             const Icon = ICON_MAP[item.path] ?? Home;
@@ -100,6 +111,32 @@ export function SideNav() {
           })}
         </ul>
       </nav>
+
+      {/* Bottom actions */}
+      <div className="shrink-0 px-sm pb-md pt-sm space-y-0.5" style={{ borderTop: "1px solid rgba(65,182,230,0.2)" }}>
+        <button
+          onClick={() => navigate(ROUTES.changePassword)}
+          className={cn(
+            "group flex w-full items-center gap-sm rounded-lg px-md py-2.5 text-caption font-medium",
+            "text-white/65 transition-colors duration-micro hover:bg-white/10 hover:text-white",
+            "focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/60"
+          )}
+        >
+          <KeyRound className="h-4 w-4 shrink-0 text-white/65 group-hover:text-white" aria-hidden={true} />
+          <span>Change password</span>
+        </button>
+        <button
+          onClick={handleSignOut}
+          className={cn(
+            "group flex w-full items-center gap-sm rounded-lg px-md py-2.5 text-caption font-medium",
+            "text-white/65 transition-colors duration-micro hover:bg-white/10 hover:text-white",
+            "focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/60"
+          )}
+        >
+          <LogOut className="h-4 w-4 shrink-0 text-white/65 group-hover:text-white" aria-hidden={true} />
+          <span>Sign out</span>
+        </button>
+      </div>
     </aside>
   );
 }
