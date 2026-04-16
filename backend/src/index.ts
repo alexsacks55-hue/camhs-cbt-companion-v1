@@ -70,6 +70,7 @@ import patternsRouter   from "./routes/patterns.routes";
 import sessionRouter    from "./routes/session.routes";
 import insightsRouter   from "./routes/insights.routes";
 import diaryRouter      from "./routes/diary.routes";
+import sleepRouter      from "./routes/sleep.routes";
 app.use("/api/v1/auth",              authRouter);
 app.use("/api/v1/resources",         resourcesRouter);
 app.use("/api/v1/checkins",          checkinsRouter);
@@ -79,6 +80,7 @@ app.use("/api/v1/patterns",          patternsRouter);
 app.use("/api/v1/session-companion", sessionRouter);
 app.use("/api/v1/insights",          insightsRouter);
 app.use("/api/v1/diary",             diaryRouter);
+app.use("/api/v1/sleep",             sleepRouter);
 
 // ── 404 handler ───────────────────────────────────────────────────────────────
 

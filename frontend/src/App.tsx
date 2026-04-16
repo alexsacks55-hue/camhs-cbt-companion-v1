@@ -15,6 +15,10 @@ import ResourceDetailPage from "@/pages/resources/ResourceDetailPage";
 import AdminResourcesPage from "@/pages/admin/AdminResourcesPage";
 import AdminResourceFormPage from "@/pages/admin/AdminResourceFormPage";
 
+// Sleep tools
+import SleepDiaryPage from "@/pages/sleep/SleepDiaryPage";
+import WindDownPage from "@/pages/sleep/WindDownPage";
+
 // Phase 6 — Mood Check-In
 import MoodCheckinPage from "@/pages/checkin/MoodCheckinPage";
 
@@ -186,6 +190,22 @@ export default function App() {
             element={
               <ProtectedRoute feature="training">
                 <TrainingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={ROUTES.sleepDiary}
+            element={
+              <ProtectedRoute>
+                <SleepDiaryPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={ROUTES.windDown}
+            element={
+              <ProtectedRoute>
+                <WindDownPage />
               </ProtectedRoute>
             }
           />

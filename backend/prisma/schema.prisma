@@ -139,6 +139,8 @@ model User {
   structured_summaries   StructuredSummary[]
   safeguarding_prompts   SafeguardingPrompt[]
   activity_diary_entries ActivityDiaryEntry[]
+  sleep_diary_entries    SleepDiaryEntry[]
+  wind_down_routine      WindDownRoutine?
 
   @@map("users")
   @@schema("core")
@@ -170,6 +172,8 @@ model Resource {
   video_label     String?
   /// Position of the video relative to body text: "top" (before) or "below" (after).
   video_placement String?
+  /// Optional in-app route that links this resource to an interactive tool (e.g. "/sleep/diary").
+  app_link        String?
   /// UUID of the admin user who created this — not a link to a young person.
   created_by      String?
   created_at      DateTime         @default(now())
@@ -323,6 +327,48 @@ model ActivityDiaryEntry {
   @@unique([user_id, entry_date])
   @@index([user_id, entry_date])
   @@map("activity_diary_entries")
+  @@schema("core")
+}
+
+/// Nightly sleep log. One entry per user per calendar date.
+/// bedtime and wake_time are stored as "HH:MM" strings — no timezone ambiguity.
+model SleepDiaryEntry {
+  id            String   @id @default(uuid())
+  user_id       String
+  /// Calendar date stored as "YYYY-MM-DD".
+  entry_date    String
+  /// Time the user went to bed, e.g. "22:30".
+  bedtime       String
+  /// Time the user woke up, e.g. "07:15".
+  wake_time     String
+  /// 1–10 sleep quality rating.
+  sleep_quality Int
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, entry_date])
+  @@index([user_id, entry_date])
+  @@map("sleep_diary_entries")
+  @@schema("core")
+}
+
+/// User's personalised wind-down routine. One row per user — upserted on save.
+/// activities JSON: string[] — values from a fixed preset list, no free text.
+model WindDownRoutine {
+  id             String   @id @default(uuid())
+  user_id        String   @unique
+  /// Target bedtime, e.g. "22:00".
+  target_bedtime String?
+  /// Fixed-list activity names selected by the user.
+  activities     Json     @default("[]")
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("wind_down_routines")
   @@schema("core")
 }
 

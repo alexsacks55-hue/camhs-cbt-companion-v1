@@ -40,6 +40,10 @@ export const ROUTES = {
   training: "/training",
 
   // ── Admin / content management ────────────────────────────────────────────
+  // ── Sleep tools ───────────────────────────────────────────────────────────────
+  sleepDiary: "/sleep/diary",
+  windDown:   "/sleep/wind-down",
+
   admin: "/admin",
   adminResources: "/admin/resources",
   adminResourceNew: "/admin/resources/new",

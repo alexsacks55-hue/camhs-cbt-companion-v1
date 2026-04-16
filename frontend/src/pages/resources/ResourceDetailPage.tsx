@@ -10,6 +10,11 @@ import { resourcesApi } from "@/services/resources.service";
 import { ExportType, JourneyStep, ContentType } from "shared/types/enums";
 import { buildRoute } from "@/config/routes";
 
+const APP_LINK_META: Record<string, { label: string; description: string }> = {
+  "/sleep/diary":     { label: "Open Sleep Diary",           description: "Log your bedtime, wake time, and sleep quality." },
+  "/sleep/wind-down": { label: "Open Wind-Down Planner",     description: "Build and save your personal wind-down routine." },
+};
+
 const JOURNEY_LABELS: Record<JourneyStep, string> = {
   [JourneyStep.Understand]: "Understand",
   [JourneyStep.TryIt]: "Try it",
@@ -156,6 +161,25 @@ export default function ResourceDetailPage() {
           </section>
         )}
 
+
+        {/* In-app tool link */}
+        {resource.app_link && APP_LINK_META[resource.app_link] && (
+          <section className="rounded-xl border border-border bg-background p-lg">
+            <h2 className="text-body font-semibold text-foreground">
+              {APP_LINK_META[resource.app_link].label}
+            </h2>
+            <p className="mt-xs text-caption text-muted-foreground">
+              {APP_LINK_META[resource.app_link].description}
+            </p>
+            <Button
+              onClick={() => navigate(resource.app_link!)}
+              className="mt-md"
+              style={{ backgroundColor: "#003087" }}
+            >
+              {APP_LINK_META[resource.app_link].label}
+            </Button>
+          </section>
+        )}
 
         {/* Export action */}
         {hasExport && (

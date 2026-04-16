@@ -33,6 +33,7 @@ export const CreateResourceSchema = z.object({
   video_url: z.string().url("Must be a valid URL.").nullable().optional(),
   video_label: z.string().max(300).nullable().optional(),
   video_placement: z.enum(["top", "below"]).nullable().optional(),
+  app_link: z.string().max(200).nullable().optional(),
   visibility: z
     .array(z.enum(ROLES))
     .min(1, "At least one role must be able to see this resource."),

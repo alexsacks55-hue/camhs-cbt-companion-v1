@@ -34,6 +34,7 @@ const schema = z.object({
   video_url:       z.string().url("Must be a valid URL.").nullable().optional().or(z.literal("")),
   video_label:     z.string().max(300).nullable().optional(),
   video_placement: z.enum(["top", "below"]).nullable().optional(),
+  app_link:        z.string().max(200).nullable().optional().or(z.literal("")),
   visibility:      z.array(z.nativeEnum(UserRole)).min(1, "Select at least one role."),
 });
 
@@ -103,6 +104,7 @@ export default function AdminResourceFormPage() {
           video_url:       r.video_url ?? "",
           video_label:     r.video_label ?? "",
           video_placement: (r.video_placement as "top" | "below") ?? null,
+          app_link:        r.app_link ?? "",
           visibility:      r.visibility.map((v) => v.role as UserRole),
         });
         setLoadingExisting(false);
@@ -124,6 +126,7 @@ export default function AdminResourceFormPage() {
         video_url: values.video_url || null,
         video_label: values.video_label || null,
         video_placement: values.video_placement ?? null,
+        app_link: values.app_link || null,
       };
 
       if (isEdit && resourceId) {
@@ -353,6 +356,15 @@ export default function AdminResourceFormPage() {
             />
           </Field>
         </div>
+
+        {/* In-app tool link */}
+        <Field
+          label="In-app tool link"
+          hint='Links this resource to an interactive tool. Use "/sleep/diary" or "/sleep/wind-down". Leave blank for none.'
+          error={errors.app_link?.message}
+        >
+          <Input id="app_link" placeholder="/sleep/diary" {...register("app_link")} />
+        </Field>
 
         {/* Typical session + Sort order row */}
         <div className="grid gap-md sm:grid-cols-2">

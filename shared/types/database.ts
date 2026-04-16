@@ -76,6 +76,8 @@ export interface DBResource {
   video_label: string | null;
   /** "top" = before body text, "below" = after body text. */
   video_placement: string | null;
+  /** In-app route to an interactive tool, e.g. "/sleep/diary". */
+  app_link: string | null;
   created_by: string | null;
   created_at: Date;
   updated_at: Date;
@@ -230,6 +232,36 @@ export interface DBActivityDiaryEntry {
 }
 
 export type CreateActivityDiaryEntry = Omit<DBActivityDiaryEntry, "id" | "created_at" | "updated_at">;
+
+// ─── Sleep Tools ─────────────────────────────────────────────────────────────
+
+export interface DBSleepDiaryEntry {
+  id: string;
+  user_id: string;
+  /** Calendar date as "YYYY-MM-DD". */
+  entry_date: string;
+  /** Time in "HH:MM" format, e.g. "22:30". */
+  bedtime: string;
+  /** Time in "HH:MM" format, e.g. "07:15". */
+  wake_time: string;
+  /** 1–10 sleep quality rating. */
+  sleep_quality: number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export type CreateSleepDiaryEntry = Omit<DBSleepDiaryEntry, "id" | "created_at" | "updated_at">;
+
+export interface DBWindDownRoutine {
+  id: string;
+  user_id: string;
+  /** Target bedtime in "HH:MM" format, e.g. "22:00". Null if not set. */
+  target_bedtime: string | null;
+  /** Fixed-list activity names selected by the user. */
+  activities: string[];
+  created_at: Date;
+  updated_at: Date;
+}
 
 // ─── Analytics Events (analytics schema) ─────────────────────────────────────
 
