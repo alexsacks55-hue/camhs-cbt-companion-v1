@@ -41,6 +41,7 @@ import TrainingPage from "@/pages/training/TrainingPage";
 // Auth & onboarding pages
 import SignInPage from "@/pages/auth/SignInPage";
 import SignUpPage from "@/pages/auth/SignUpPage";
+import ChangePasswordPage from "@/pages/auth/ChangePasswordPage";
 import RoleSelectionPage from "@/pages/onboarding/RoleSelectionPage";
 import AgeBandPage from "@/pages/onboarding/AgeBandPage";
 import ParentalAwarenessPage from "@/pages/onboarding/ParentalAwarenessPage";
@@ -57,6 +58,14 @@ export default function App() {
           {/* ── Auth & onboarding (public) ─────────────────────────────────── */}
           <Route path={ROUTES.signIn} element={<SignInPage />} />
           <Route path={ROUTES.signUp} element={<SignUpPage />} />
+          <Route
+            path={ROUTES.changePassword}
+            element={
+              <ProtectedRoute>
+                <ChangePasswordPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path={ROUTES.onboardingRole} element={<RoleSelectionPage />} />
           <Route path={ROUTES.onboardingAge} element={<AgeBandPage />} />
           <Route

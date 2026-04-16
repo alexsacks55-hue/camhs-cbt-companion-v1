@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useTheme } from "@/app/ThemeContext";
 import { Sun, Moon } from "lucide-react";
+import { ROUTES } from "@/config/routes";
 
 /**
  * Slim top bar — visible on md and up alongside the sidebar.
@@ -28,6 +29,13 @@ export function TopNav() {
         className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/20 text-white/70 transition-colors duration-micro hover:border-white/50 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/60"
       >
         {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      </button>
+
+      <button
+        onClick={() => navigate(ROUTES.changePassword)}
+        className="inline-flex h-8 items-center rounded-md border border-white/30 px-md text-caption font-medium text-white/80 transition-colors duration-micro hover:border-white/60 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/60"
+      >
+        Change password
       </button>
 
       <button

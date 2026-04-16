@@ -8,6 +8,7 @@ import {
   handleRefresh,
   handleLogout,
   handleMe,
+  handleChangePassword,
 } from "../controllers/auth.controller";
 
 const router = Router();
@@ -29,5 +30,8 @@ router.post("/logout", requireAuth, handleLogout);
 
 // GET /api/v1/auth/me  — returns current user from token
 router.get("/me", requireAuth, handleMe);
+
+// PATCH /api/v1/auth/password  — change password for signed-in user
+router.patch("/password", requireAuth, handleChangePassword);
 
 export default router;

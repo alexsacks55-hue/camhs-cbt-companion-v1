@@ -55,4 +55,8 @@ export const authApi = {
     await api.post("/v1/auth/logout");
     delete api.defaults.headers.common["Authorization"];
   },
+
+  async changePassword(current_password: string, new_password: string): Promise<void> {
+    await api.patch("/v1/auth/password", { current_password, new_password });
+  },
 };

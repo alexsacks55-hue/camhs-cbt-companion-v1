@@ -6,6 +6,7 @@ export const ROUTES = {
   // ── Auth / onboarding ─────────────────────────────────────────────────────
   signIn: "/auth/sign-in",
   signUp: "/auth/sign-up",
+  changePassword: "/auth/change-password",
   onboardingRole: "/onboarding/role",
   onboardingAge: "/onboarding/age",
   onboardingParentalAwareness: "/onboarding/parental-awareness",

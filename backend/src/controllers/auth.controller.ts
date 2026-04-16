@@ -7,8 +7,10 @@ import {
   refresh,
   logout,
   getById,
+  changePassword,
   RegisterSchema,
   LoginSchema,
+  ChangePasswordSchema,
   ConflictError,
   UnauthorizedError,
 } from "../services/auth.service";
@@ -113,6 +115,29 @@ export async function handleLogout(req: Request, res: Response): Promise<void> {
   }
   res.clearCookie(REFRESH_COOKIE_NAME, { path: "/api/v1/auth", sameSite: "none", secure: true });
   res.status(200).json({ data: { message: "Signed out successfully." } });
+}
+
+export async function handleChangePassword(req: Request, res: Response): Promise<void> {
+  const parsed = ChangePasswordSchema.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({
+      message: "Please check the form and try again.",
+      errors: parsed.error.flatten().fieldErrors,
+    });
+    return;
+  }
+
+  try {
+    await changePassword(req.user!.sub, parsed.data);
+    res.status(200).json({ data: { message: "Password changed successfully." } });
+  } catch (err) {
+    if (err instanceof UnauthorizedError) {
+      res.status(401).json({ message: err.message });
+      return;
+    }
+    logger.error("Change password error", { error: err });
+    res.status(500).json({ message: "Something went wrong. Please try again." });
+  }
 }
 
 export async function handleMe(req: Request, res: Response): Promise<void> {

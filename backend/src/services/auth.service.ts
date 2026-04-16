@@ -182,6 +182,28 @@ export async function getById(userId: string) {
   return safeUser(user);
 }
 
+export const ChangePasswordSchema = z.object({
+  current_password: z.string().min(1, "Current password is required."),
+  new_password: z
+    .string()
+    .min(PASSWORD_MIN_LENGTH, `New password must be at least ${PASSWORD_MIN_LENGTH} characters.`),
+});
+
+export type ChangePasswordInput = z.infer<typeof ChangePasswordSchema>;
+
+export async function changePassword(userId: string, input: ChangePasswordInput) {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) throw new UnauthorizedError("User not found.");
+
+  const valid = await verifyPassword(input.current_password, user.password_hash);
+  if (!valid) throw new UnauthorizedError("Current password is incorrect.");
+
+  const new_hash = await hashPassword(input.new_password);
+  await prisma.user.update({ where: { id: userId }, data: { password_hash: new_hash } });
+
+  logger.info("Password changed", { userId });
+}
+
 // ── Error types ───────────────────────────────────────────────────────────────
 
 export class ConflictError extends Error {
