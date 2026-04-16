@@ -33,6 +33,11 @@ export class ErrorBoundary extends Component<Props, State> {
             We're sorry — something unexpected happened. Please refresh the page or go back to
             the home screen.
           </p>
+          {this.state.message && (
+            <p className="rounded bg-muted px-sm py-xs text-left font-mono text-[11px] text-destructive break-all">
+              {this.state.message}
+            </p>
+          )}
           <div className="flex flex-col gap-sm sm:flex-row sm:justify-center">
             <button
               onClick={() => window.location.reload()}
