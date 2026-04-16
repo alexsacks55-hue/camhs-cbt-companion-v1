@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { LoadingState } from "@/components/ui/loading-state";
 import { ErrorState } from "@/components/ui/error-state";
 import { useSleepDiary } from "@/hooks/useSleep";
+import { useAuth } from "@/hooks/useAuth";
+import { UserRole } from "shared/types/enums";
 import { cn } from "@/lib/utils";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -41,6 +43,8 @@ function calcHours(bedtime: string, wakeTime: string): string {
 export default function SleepDiaryPage() {
   const navigate = useNavigate();
   const today = todayStr();
+  const { user } = useAuth();
+  const isParent = user?.role === UserRole.ParentCarer;
   const { entries, status, save } = useSleepDiary(14);
 
   const [bedtime, setBedtime] = useState("");
@@ -89,7 +93,9 @@ export default function SleepDiaryPage() {
       <header className="mb-xl">
         <h1 className="text-h2 text-foreground">Sleep Diary</h1>
         <p className="mt-xs text-caption text-muted-foreground">
-          Log your sleep each night to track patterns and spot what helps.
+          {isParent
+            ? "Log your child's sleep each night to track patterns and spot what helps."
+            : "Log your sleep each night to track patterns and spot what helps."}
         </p>
       </header>
 
@@ -105,7 +111,9 @@ export default function SleepDiaryPage() {
 
           {/* Tonight's entry */}
           <section className="rounded-xl border border-border bg-card p-lg space-y-md">
-            <h2 className="text-h3 text-foreground">Tonight's entry</h2>
+            <h2 className="text-h3 text-foreground">
+              {isParent ? "Your child's sleep tonight" : "Tonight's entry"}
+            </h2>
 
             {/* Bedtime + Wake time */}
             <div className="grid grid-cols-2 gap-md">
@@ -142,7 +150,9 @@ export default function SleepDiaryPage() {
 
             {/* Sleep quality */}
             <div>
-              <p className="text-caption font-medium text-foreground mb-xs">Sleep quality</p>
+              <p className="text-caption font-medium text-foreground mb-xs">
+                {isParent ? "Your child's sleep quality" : "Sleep quality"}
+              </p>
               <p className="text-caption text-muted-foreground mb-sm">1 = very poor, 10 = excellent</p>
               <div className="flex gap-xs flex-wrap">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
